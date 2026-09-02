@@ -1,0 +1,826 @@
+<title>Kakehashi Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#111827;
+    --ground:#F4F2EC;
+    --panel:#FFFFFF;
+    --panel-2:#FAF8F2;
+    --line:#E4DFD3;
+    --muted:#6A6E7A;
+    --night:#16233F;
+    --night-2:#22324f;
+    --accent:#E1543B;      /* kakehashi vermilion */
+    --teal:#12A67E;        /* mottainai */
+    --amber:#E9A23B;       /* omotenashi */
+    --violet:#7A5A33;
+    --good:#12A67E;
+    --warn:#E9A23B;
+    --crit:#E1543B;
+    --shadow:0 1px 2px rgba(20,25,40,.06),0 12px 32px -12px rgba(20,25,40,.18);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#ECE9E1;
+      --ground:#0E1524;
+      --panel:#16202f;
+      --panel-2:#1b2739;
+      --line:#2b3a4f;
+      --muted:#9aa3b2;
+      --night:#0a1120;
+      --night-2:#13203a;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -14px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#ECE9E1;--ground:#0E1524;--panel:#16202f;--panel-2:#1b2739;--line:#2b3a4f;
+    --muted:#9aa3b2;--night:#0a1120;--night-2:#13203a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -14px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New","Zen Kaku Gothic New",sans-serif;text-wrap:balance;margin:0;font-weight:700}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent)}
+
+  /* ---------- top bar ---------- */
+  header.top{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb,var(--ground) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .top-in{display:flex;align-items:center;gap:18px;height:60px}
+  .brand{display:flex;align-items:baseline;gap:9px;font-family:"Zen Kaku Gothic New";font-weight:900;letter-spacing:.02em}
+  .brand .jp{color:var(--accent);font-size:19px}
+  .brand .en{font-size:15px;letter-spacing:.14em}
+  .top nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+  .top nav button{
+    font:inherit;font-size:12.5px;font-weight:600;letter-spacing:.03em;
+    background:transparent;border:1px solid transparent;color:var(--muted);
+    padding:7px 12px;border-radius:999px;cursor:pointer;
+  }
+  .top nav button.on{background:var(--night);color:#fff}
+  .top nav button:hover:not(.on){color:var(--ink);border-color:var(--line)}
+
+  section.view{display:none;padding:34px 0 70px}
+  section.view.on{display:block}
+
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .lead{color:var(--muted);max-width:62ch;font-size:15px}
+  h2.big{font-size:clamp(26px,4vw,40px);font-weight:900;line-height:1.08}
+  h3.sec{font-size:19px;margin:34px 0 14px;font-weight:700}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;border-radius:22px;
+    background:linear-gradient(150deg,var(--night) 0%,var(--night-2) 55%,#2c3f63 100%);
+    color:#F3F1EA;padding:40px 38px;box-shadow:var(--shadow);
+  }
+  .hero .bridge{position:absolute;inset:0;opacity:.16;pointer-events:none}
+  .hero h1{font-size:clamp(34px,6vw,62px);font-weight:900;letter-spacing:.01em;line-height:1}
+  .hero .tag{color:var(--amber);font-weight:700;font-size:clamp(15px,2vw,20px);margin-top:12px;font-family:"Zen Kaku Gothic New"}
+  .hero p.sub{color:#c7cede;max-width:54ch;margin:14px 0 0;font-size:14.5px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+  .chips span{font-size:11px;font-weight:600;letter-spacing:.12em;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+  .chips span.a{background:var(--accent);border-color:transparent}
+  .chips span.t{background:var(--teal);border-color:transparent}
+
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g3,.g2,.g4{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .card h4{font-size:15px;margin-bottom:6px}
+  .card p{margin:0;font-size:13.5px;color:var(--muted)}
+  .card .k{font-family:"Zen Kaku Gothic New";font-weight:900;font-size:30px;line-height:1}
+  .card .k.accent{color:var(--accent)}.card .k.teal{color:var(--teal)}.card .k.amber{color:var(--amber)}
+  .card .kl{font-size:12px;color:var(--muted);margin-top:6px}
+  .stripe{height:3px;border-radius:3px;margin:-18px -18px 14px;background:var(--accent)}
+  .stripe.teal{background:var(--teal)}.stripe.amber{background:var(--amber)}.stripe.night{background:var(--night)}
+
+  /* ---------- prototype stage ---------- */
+  .stage{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start}
+  @media(max-width:1000px){.stage{grid-template-columns:1fr}}
+
+  .devrow{display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+
+  .tablet{
+    width:430px;max-width:100%;background:#0d1626;border-radius:22px;padding:14px;
+    box-shadow:var(--shadow);border:1px solid #223;flex:0 0 auto;
+  }
+  .phone{
+    width:288px;background:#0d1626;border-radius:34px;padding:12px;
+    box-shadow:var(--shadow);border:1px solid #223;flex:0 0 auto;
+  }
+  .screen{background:var(--panel);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .phone .screen{border-radius:24px;min-height:520px}
+  .tablet .screen{min-height:520px}
+  .sbar{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-size:10.5px;color:var(--muted);border-bottom:1px solid var(--line)}
+  .sbar .role{font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+  .sbody{padding:16px;flex:1;display:flex;flex-direction:column;gap:12px}
+
+  .field label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .amount{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--panel-2)}
+  .amount span{font-size:22px;color:var(--muted)}
+  .amount input{border:0;background:transparent;font:inherit;font-family:"IBM Plex Mono";font-size:26px;width:100%;color:var(--ink);outline:none}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .keypad button{font:inherit;font-family:"IBM Plex Mono";font-size:17px;padding:12px 0;border:1px solid var(--line);background:var(--panel);border-radius:10px;cursor:pointer;color:var(--ink)}
+  .keypad button:active{background:var(--panel-2)}
+
+  .btn{font:inherit;font-weight:600;font-size:13.5px;border:0;border-radius:11px;padding:12px 16px;cursor:pointer;background:var(--night);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%}
+  .btn.accent{background:var(--accent)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+
+  .qr-box{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;border:1px dashed var(--line);border-radius:14px;background:var(--panel-2)}
+  #qrCanvas,#qrCanvasP{image-rendering:pixelated;border-radius:6px;background:#fff}
+  .countdown{font-family:"IBM Plex Mono";font-size:13px;font-weight:500}
+  .countdown.warn{color:var(--crit)}
+  .metaline{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);width:100%;font-family:"IBM Plex Mono"}
+
+  .scanview{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:var(--muted)}
+  .scanframe{width:170px;height:170px;border-radius:18px;position:relative;background:#0d1626;overflow:hidden}
+  .scanframe .corner{position:absolute;width:26px;height:26px;border:3px solid var(--amber)}
+  .scanframe .c1{top:10px;left:10px;border-right:0;border-bottom:0}
+  .scanframe .c2{top:10px;right:10px;border-left:0;border-bottom:0}
+  .scanframe .c3{bottom:10px;left:10px;border-right:0;border-top:0}
+  .scanframe .c4{bottom:10px;right:10px;border-left:0;border-top:0}
+  .scanline{position:absolute;left:8px;right:8px;height:2px;background:var(--amber);box-shadow:0 0 12px var(--amber);animation:scan 1.9s ease-in-out infinite}
+  @keyframes scan{0%,100%{top:14px}50%{top:154px}}
+  @media(prefers-reduced-motion:reduce){.scanline{animation:none;top:84px}}
+
+  .aichip{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--panel-2);font-size:12px}
+  .aichip .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);margin-top:5px;flex:0 0 auto}
+  .rewardcard{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .rewardcard .rc-top{padding:14px;color:#fff;background:linear-gradient(135deg,var(--night),var(--night-2))}
+  .rewardcard .rc-top.teal{background:linear-gradient(135deg,#0c7a5c,var(--teal))}
+  .rewardcard .rc-top.amber{background:linear-gradient(135deg,#b57a1e,var(--amber))}
+  .rewardcard .rc-body{padding:12px 14px;font-size:12px;color:var(--muted)}
+  .rewardcard .rc-top .pt{font-family:"IBM Plex Mono";font-size:12px;opacity:.85}
+  .rewardcard .rc-top .nm{font-family:"Zen Kaku Gothic New";font-weight:700;font-size:16px;margin-top:3px}
+
+  .walletlist{display:flex;flex-direction:column;gap:8px}
+  .wrow{display:flex;gap:10px;align-items:center;padding:9px 10px;border:1px solid var(--line);border-radius:10px;font-size:12px}
+  .wrow .ico{width:30px;height:30px;border-radius:8px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--panel-2)}
+  .wrow .grow{flex:1}
+  .wrow .pts{font-family:"IBM Plex Mono";font-weight:500;color:var(--teal)}
+
+  .tokbar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,var(--night),var(--night-2));color:#fff}
+  .tokbar .bal{font-family:"IBM Plex Mono";font-size:20px;font-weight:500}
+  .tokbar .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+
+  .stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .stamp{aspect-ratio:1;border-radius:50%;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
+  .stamp.filled{border-style:solid;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+
+  /* ---------- control rail ---------- */
+  .rail{position:sticky;top:74px;display:flex;flex-direction:column;gap:12px}
+  .rail .card{padding:16px}
+  .flowsteps{display:flex;flex-direction:column;gap:2px}
+  .fstep{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-radius:9px;font-size:12.5px}
+  .fstep .n{width:20px;height:20px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-family:"IBM Plex Mono";flex:0 0 auto}
+  .fstep.done .n{background:var(--teal);border-color:var(--teal);color:#fff}
+  .fstep.active{background:var(--panel-2)}
+  .fstep.active .n{background:var(--accent);border-color:var(--accent);color:#fff}
+  .fstep .t small{display:block;color:var(--muted);font-size:11px}
+
+  .modeseg{display:flex;gap:6px;background:var(--panel-2);padding:5px;border-radius:11px}
+  .modeseg button{flex:1;font:inherit;font-size:11.5px;font-weight:600;border:0;background:transparent;padding:8px 4px;border-radius:8px;cursor:pointer;color:var(--muted)}
+  .modeseg button.on{background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+  .modeseg button.on[data-m="mottainai"]{color:var(--teal)}
+  .modeseg button.on[data-m="omotenashi"]{color:var(--amber)}
+  .modeseg button.on[data-m="stamp"]{color:var(--accent)}
+
+  .persona{display:flex;gap:8px;flex-wrap:wrap}
+  .persona button{font:inherit;font-size:11.5px;border:1px solid var(--line);background:var(--panel);padding:7px 10px;border-radius:999px;cursor:pointer;color:var(--ink)}
+  .persona button.on{background:var(--night);color:#fff;border-color:var(--night)}
+
+  .kpi{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+  .kpi:last-child{border-bottom:0}
+  .kpi b{font-family:"IBM Plex Mono";font-weight:500}
+  .kpi b.up{color:var(--teal)}
+
+  .note{font-size:11.5px;color:var(--muted);display:flex;gap:7px}
+  .note::before{content:"";width:3px;background:var(--accent);border-radius:2px;flex:0 0 auto}
+
+  table.cmp{width:100%;border-collapse:collapse;font-size:13px}
+  table.cmp th,table.cmp td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  table.cmp th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  table.cmp td.y{color:var(--teal);font-weight:600}
+  table.cmp td.n{color:var(--muted)}
+  table.cmp td.p{color:var(--warn)}
+  table.cmp tr:first-child{}
+  .cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.timeline{grid-template-columns:1fr}}
+  .phase{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+  .phase .ph-h{padding:12px 14px;color:#fff;font-weight:700;font-family:"Zen Kaku Gothic New";font-size:13px;display:flex;justify-content:space-between}
+  .phase:nth-child(1) .ph-h{background:var(--teal)}
+  .phase:nth-child(2) .ph-h{background:var(--amber)}
+  .phase:nth-child(3) .ph-h{background:var(--accent)}
+  .phase ul{margin:0;padding:14px 14px 16px 30px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
+
+  .flowmap{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+  .flowmap .fm{flex:1;min-width:120px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel);font-size:12px}
+  .flowmap .fm .fh{font-weight:700;font-family:"Zen Kaku Gothic New";font-size:13px;margin-bottom:3px}
+  .flowmap .arrow{align-self:center;color:var(--muted);font-size:18px}
+  @media(max-width:900px){.flowmap .arrow{transform:rotate(90deg)}}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:12px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;transition:.3s;background:var(--night);color:#fff;padding:11px 18px;border-radius:999px;font-size:12.5px;font-weight:600;z-index:80;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><span class="jp">架け橋</span><span class="en">KAKEHASHI</span></div>
+    <nav id="nav">
+      <button data-v="proto" class="on">Prototype</button>
+      <button data-v="engine">AI Engine</button>
+      <button data-v="model">Business Model</button>
+      <button data-v="market">Market</button>
+      <button data-v="moat">Moat</button>
+      <button data-v="roadmap">Roadmap</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ PROTOTYPE ============ -->
+<section class="view on" id="v-proto">
+  <div class="wrap">
+    <div class="hero" style="margin-bottom:30px">
+      <svg class="bridge" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 250 Q 300 60 600 250 T 1200 250" stroke="#fff" stroke-width="3" fill="none"/>
+        <path d="M0 250 L1200 250" stroke="#fff" stroke-width="2"/>
+        <g stroke="#fff" stroke-width="1.5">
+          <line x1="120" y1="250" x2="120" y2="150"/><line x1="240" y1="250" x2="240" y2="110"/>
+          <line x1="360" y1="250" x2="360" y2="95"/><line x1="480" y1="250" x2="480" y2="110"/>
+          <line x1="600" y1="250" x2="600" y2="130"/><line x1="720" y1="250" x2="720" y2="110"/>
+          <line x1="840" y1="250" x2="840" y2="95"/><line x1="960" y1="250" x2="960" y2="110"/>
+          <line x1="1080" y1="250" x2="1080" y2="150"/>
+        </g>
+      </svg>
+      <div style="position:relative">
+        <div class="eyebrow" style="color:var(--amber)">Interactive Prototype · MVP Design Phase</div>
+        <h1>KAKEHASHI</h1>
+        <div class="tag">Turning Every Purchase Into an Experience</div>
+        <p class="sub">Walk the full loop below — a ¥700 purchase at an independent café becomes a personalized digital reward, and the merchant gets retention plus insight. Drive it step by step with the panel on the right.</p>
+        <div class="chips">
+          <span class="a">B2B SaaS</span><span>AI</span><span>F&amp;B</span><span>Tourism</span><span class="t">ESG</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div>
+        <div class="devrow">
+          <!-- MERCHANT TABLET -->
+          <div class="tablet">
+            <div class="screen">
+              <div class="sbar"><span class="role">● Merchant App — Kurumi Coffee, Nakameguro</span><span class="mono">Level 1 · QR</span></div>
+              <div class="sbody" id="merchantBody">
+                <!-- injected -->
+              </div>
+            </div>
+          </div>
+
+          <!-- CUSTOMER PHONE -->
+          <div class="phone">
+            <div class="screen">
+              <div class="sbar"><span class="role" id="custRole">● Wallet — Aoi</span><span class="mono" id="custMeta">Student · 1.2km</span></div>
+              <div class="sbody" id="customerBody">
+                <!-- injected -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid g3" style="margin-top:22px">
+          <div class="card"><div class="stripe teal"></div><h4>Mottainai Mode</h4><p>AI detects surplus inventory → fires a full-price reward campaign → waste drops, margin protected.</p></div>
+          <div class="card"><div class="stripe amber"></div><h4>Omotenashi Mode</h4><p>Detects an inbound tourist → delivers cultural rewards → routes spend to nearby local SMEs.</p></div>
+          <div class="card"><div class="stripe"></div><h4>Digital Stamp Rally</h4><p>Modernized eki-stamp culture → collect stamps across merchants → unlock escalating experiences.</p></div>
+        </div>
+      </div>
+
+      <!-- CONTROL RAIL -->
+      <aside class="rail">
+        <div class="card">
+          <h4 style="margin-bottom:10px">Scenario</h4>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Active mode</div>
+          <div class="modeseg" id="modeSeg">
+            <button data-m="mottainai" class="on">Mottainai</button>
+            <button data-m="omotenashi">Omotenashi</button>
+            <button data-m="stamp">Stamp Rally</button>
+          </div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px">Customer at the counter</div>
+          <div class="persona" id="personaSel">
+            <button data-p="student" class="on">Aoi · student</button>
+            <button data-p="tourist">Marco · tourist</button>
+            <button data-p="local">Rie · regular</button>
+          </div>
+          <p class="note" style="margin-top:12px"><span></span>The merchant sets a <b>goal</b> ("fill my 2–5PM dead zone with students within 1.5km"), not a specific reward. The engine picks.</p>
+        </div>
+
+        <div class="card">
+          <h4 style="margin-bottom:6px">Transaction flow</h4>
+          <div class="flowsteps" id="flowSteps"></div>
+          <button class="btn ghost" id="resetBtn" style="margin-top:10px">Reset loop</button>
+        </div>
+
+        <div class="card">
+          <div class="stripe night"></div>
+          <h4 style="margin-bottom:8px">Merchant dashboard</h4>
+          <div class="kpi"><span>Dead-zone covers today</span><b id="k-covers">0</b></div>
+          <div class="kpi"><span>Surplus units rescued</span><b id="k-surplus">0</b></div>
+          <div class="kpi"><span>New customer profiles</span><b id="k-profiles">0</b></div>
+          <div class="kpi"><span>Repeat-visit rate</span><b id="k-repeat" class="up">31%</b></div>
+          <div class="kpi"><span>Reward cost to merchant</span><b>¥0</b></div>
+          <p class="note" style="margin-top:10px"><span></span>Rewards are funded by digital partners. The café pays only the ¥2,000–5,000/mo SaaS fee.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI ENGINE ============ -->
+<section class="view" id="v-engine">
+  <div class="wrap">
+    <div class="eyebrow">The AI Reward Engine</div>
+    <h2 class="big">Merchant sets a goal. The engine solves for the reward.</h2>
+    <p class="lead" style="margin-top:12px">Every scan triggers a real-time optimization across four variables. Adjust the inputs and watch the recommended reward change.</p>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card">
+        <h4 style="margin-bottom:14px">Inputs</h4>
+        <div class="field" style="margin-bottom:14px">
+          <label>Merchant objective</label>
+          <select id="e-goal" class="btn ghost" style="width:100%;text-align:left">
+            <option value="deadzone">Fill 2–5PM dead zone</option>
+            <option value="surplus">Clear surplus pastries before close</option>
+            <option value="tourist">Capture tourist spend nearby</option>
+            <option value="frequency">Increase regular visit frequency</option>
+          </select>
+        </div>
+        <div class="field" style="margin-bottom:14px">
+          <label>Customer preference signal: <span id="e-prefv" class="mono">manga</span></label>
+          <input type="range" id="e-pref" min="0" max="3" value="0" style="width:100%">
+          <div class="metaline"><span>manga</span><span>AI tools</span><span>music</span><span>travel</span></div>
+        </div>
+        <div class="field" style="margin-bottom:14px">
+          <label>Reward budget from partner: <span id="e-budv" class="mono">¥300</span></label>
+          <input type="range" id="e-bud" min="100" max="500" step="50" value="300" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Conversion probability (modeled): <span id="e-cvv" class="mono">62%</span></label>
+          <input type="range" id="e-cv" min="20" max="90" value="62" style="width:100%">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stripe teal"></div>
+        <h4 style="margin-bottom:6px">Recommended reward</h4>
+        <div class="rewardcard" style="margin:12px 0">
+          <div class="rc-top teal">
+            <div class="pt" id="e-rpts">+120 Kakehashi Token</div>
+            <div class="nm" id="e-rname">3 free manga chapters — Shōnen Jump+</div>
+          </div>
+          <div class="rc-body" id="e-rwhy">Chosen because manga has near-zero marginal cost for the partner, high emotional value for a student, and redeems off-site — pulling a repeat visit without discounting the coffee.</div>
+        </div>
+        <div class="kpi"><span>Expected dead-zone visit lift</span><b class="up" id="e-lift">+18%</b></div>
+        <div class="kpi"><span>Merchant margin impact</span><b class="up">0% (no discount)</b></div>
+        <div class="kpi"><span>Partner CAC vs. ad baseline</span><b class="up" id="e-cac">¥300 vs ¥1,500</b></div>
+        <div class="kpi"><span>Engine confidence</span><b id="e-conf">0.71</b></div>
+      </div>
+    </div>
+
+    <h3 class="sec">Optimization objective</h3>
+    <div class="card">
+      <p class="mono" style="font-size:13px;color:var(--ink)">maximize&nbsp; Σ ( P(convert | customer, reward) × merchant_goal_value(reward) )<br>subject to&nbsp; reward_cost ≤ partner_budget&nbsp; ∧&nbsp; reward ∈ customer_affinity_set</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px">The four factors from the deck — <b>customer preference × merchant objective × reward cost × conversion probability</b> — are the terms above. The engine never shows a reward the customer has no affinity for, and never one the partner can't fund.</p>
+    </div>
+
+    <h3 class="sec">Dynamic QR — not static</h3>
+    <div class="grid g4">
+      <div class="card"><h4>5-min expiry</h4><p>Regenerated per transaction; useless if screenshotted and shared later.</p></div>
+      <div class="card"><h4>One-time use</h4><p>First scan invalidates it — no double redemption.</p></div>
+      <div class="card"><h4>Amount-locked</h4><p>Purchase value is encoded and signed in the payload.</p></div>
+      <div class="card"><h4>No hardware</h4><p>Merchant App only. AirRegi &amp; Square JP compatible at Level 2.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUSINESS MODEL ============ -->
+<section class="view" id="v-model">
+  <div class="wrap">
+    <div class="eyebrow">Business Model</div>
+    <h2 class="big">Four revenue streams. Network-effect defensibility.</h2>
+    <p class="lead" style="margin-top:12px">Merchant starts free and pays only after seeing results. Rewards are funded entirely by digital partners — never by merchants.</p>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card"><div class="stripe"></div><h4>SME SaaS subscription</h4><div class="k accent">¥2,000–5,000<span style="font-size:14px">/mo</span></div><p class="kl">AI campaigns, analytics dashboard, reward engine. Low enough for any café.</p></div>
+      <div class="card"><div class="stripe teal"></div><h4>Digital partner CAC fee</h4><div class="k teal">¥200–500<span style="font-size:14px">/user</span></div><p class="kl">Partners (manga, AI tools, streaming, edu) pay per activated new user. Marginal cost near zero for them.</p></div>
+      <div class="card"><div class="stripe amber"></div><h4>Enterprise API licensing</h4><div class="k amber">Custom</div><p class="kl">Chain restaurants and hotel groups pay for white-label API integration at scale.</p></div>
+      <div class="card"><div class="stripe night"></div><h4>Tourism board sponsorship</h4><div class="k">B2G</div><p class="kl">Local governments and JNTO sponsor campaigns that redirect tourist spend to target regions.</p></div>
+    </div>
+
+    <h3 class="sec">Why the partner math works</h3>
+    <div class="card">
+      <div class="flowmap">
+        <div class="fm"><div class="fh">Ad baseline</div>A manga app pays ¥1,000–2,000 to acquire one paying user through ads.</div>
+        <div class="arrow">→</div>
+        <div class="fm"><div class="fh">Via Kakehashi</div>Pays ¥200–500 + a near-zero-cost digital reward (a few free chapters).</div>
+        <div class="arrow">→</div>
+        <div class="fm"><div class="fh">Result</div>3–6× cheaper acquisition, and the user arrives with intent. Merchant funds none of it.</div>
+      </div>
+    </div>
+
+    <h3 class="sec">Unit economics</h3>
+    <div class="grid g4">
+      <div class="card"><div class="k">94%</div><p class="kl">Gross margin</p></div>
+      <div class="card"><div class="k">165</div><p class="kl">Break-even merchants</p></div>
+      <div class="card"><div class="k">¥3M</div><p class="kl">Fixed cost / month</p></div>
+      <div class="card"><div class="k accent">¥500M</div><p class="kl">Year 3 ARR target</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARKET ============ -->
+<section class="view" id="v-market">
+  <div class="wrap">
+    <div class="eyebrow">Market Size</div>
+    <h2 class="big">Japan is the perfect first market.</h2>
+    <div class="grid g4" style="margin-top:24px">
+      <div class="card"><div class="k accent">800K+</div><p class="kl">F&amp;B SMEs serving consumers daily</p></div>
+      <div class="card"><div class="k amber">¥13T</div><p class="kl">Annual F&amp;B market spend (2024 est.)</p></div>
+      <div class="card"><div class="k teal">42.7M</div><p class="kl">Inbound tourists in 2025 — new record</p></div>
+      <div class="card"><div class="k">58%</div><p class="kl">Cashless payments (target 65% by 2030)</p></div>
+    </div>
+
+    <h3 class="sec">Market sizing</h3>
+    <div class="grid g3">
+      <div class="card"><div class="stripe"></div><h4>TAM · ¥48B</h4><p>800K F&amp;B SMEs × ¥5K/mo SaaS (bottom-up).</p></div>
+      <div class="card"><div class="stripe amber"></div><h4>SAM · ¥9B</h4><p>~150K urban SMEs with cashless POS × ¥5K/mo.</p></div>
+      <div class="card"><div class="stripe teal"></div><h4>SOM · ¥42M</h4><p>Year 1: 500 merchants SaaS + 3 partner CAC fees.</p></div>
+    </div>
+    <p class="note" style="margin-top:16px"><span></span>Government tailwinds: cashless 65% by 2030 · JNTO tourism push · ESG food-waste mandates. Sources: METI, JNTO (2025), MAFF/MOE (FY2024).</p>
+  </div>
+</section>
+
+<!-- ============ MOAT ============ -->
+<section class="view" id="v-moat">
+  <div class="wrap">
+    <div class="eyebrow">Competitive Moat</div>
+    <h2 class="big">Why Kakehashi wins.</h2>
+    <p class="lead" style="margin-top:12px">It doesn't just compete — it creates a category: AI-native reward infrastructure for physical SMEs.</p>
+    <div class="cmp-wrap" style="margin-top:22px">
+      <table class="cmp">
+        <thead><tr><th>Capability</th><th>Kakehashi</th><th>T-Points / Rakuten</th><th>Generic loyalty app</th></tr></thead>
+        <tbody>
+          <tr><td>AI personalization</td><td class="y">Full AI</td><td class="n">None</td><td class="n">None</td></tr>
+          <tr><td>SME accessible</td><td class="y">¥2–5K/mo</td><td class="n">Large only</td><td class="p">Limited</td></tr>
+          <tr><td>Food-waste solution</td><td class="y">Mottainai Mode</td><td class="n">No</td><td class="n">No</td></tr>
+          <tr><td>Tourist ready</td><td class="y">Omotenashi Mode</td><td class="p">Partial</td><td class="n">No</td></tr>
+          <tr><td>Japanese culture fit</td><td class="y">Eki-stamp DNA</td><td class="p">Partial</td><td class="n">No</td></tr>
+          <tr><td>Digital reward variety</td><td class="y">Marketplace</td><td class="p">Points only</td><td class="p">Discounts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section class="view" id="v-roadmap">
+  <div class="wrap">
+    <div class="eyebrow">Roadmap</div>
+    <h2 class="big">From MVP to market leader.</h2>
+    <p class="lead" style="margin-top:12px">Currently: MVP Design Phase. Japan doesn't need another loyalty app.</p>
+    <div class="timeline" style="margin-top:24px">
+      <div class="phase">
+        <div class="ph-h"><span>Phase 1 · MVP Launch</span><span>Q1–Q2 2026</span></div>
+        <ul><li>QR-based onboarding</li><li>50 pilot restaurants — Tokyo</li><li>Mottainai Mode live</li><li>3 digital reward partners</li><li>Target: 2,000 consumers</li></ul>
+      </div>
+      <div class="phase">
+        <div class="ph-h"><span>Phase 2 · Scale &amp; Integrate</span><span>Q3–Q4 2026</span></div>
+        <ul><li>POS integration (Level 2)</li><li>Omotenashi Mode launch</li><li>Tourist board pilot — Kyoto</li><li>Expand: Osaka + Kyoto</li><li>Target: 500 merchants</li></ul>
+      </div>
+      <div class="phase">
+        <div class="ph-h"><span>Phase 3 · Ecosystem</span><span>2027+</span></div>
+        <ul><li>Enterprise API (Level 3)</li><li>Digital Stamp Rally rollout</li><li>Government B2G contracts</li><li>Regional Japan expansion</li><li>Target: ¥500M ARR</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">架け橋 Kakehashi · Interactive prototype for Business Case Competition 2026 · Felicia Annabel Ruriyanto &amp; Lifkie Lie. Figures from the pitch deck; prototype is illustrative.</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  /* ---------- nav ---------- */
+  $$("#nav button").forEach(function(b){
+    b.addEventListener("click",function(){
+      $$("#nav button").forEach(function(x){x.classList.remove("on")});
+      b.classList.add("on");
+      $$("section.view").forEach(function(v){v.classList.remove("on")});
+      $("#v-"+b.dataset.v).classList.add("on");
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- toast ---------- */
+  var toastT;
+  function toast(msg){
+    var t=$("#toast");t.textContent=msg;t.classList.add("show");
+    clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show")},2200);
+  }
+
+  /* ---------- data ---------- */
+  var PERSONAS={
+    student:{name:"Aoi",meta:"Student · 1.2km",aff:"manga",tourist:false,icon:"🎓"},
+    tourist:{name:"Marco",meta:"Tourist · Italy · 0.4km",aff:"travel",tourist:true,icon:"🧳"},
+    local:{name:"Rie",meta:"Regular · 12 visits",aff:"music",tourist:false,icon:"☕"}
+  };
+  var REWARDS={
+    mottainai:{
+      student:{pts:120,name:"3 free manga chapters — Jump+",cls:"teal",why:"Surplus pastry campaign is live. Manga costs the partner almost nothing, lands with a student, and redeems off-site — so Aoi buys the pastry at full price. Waste down, margin intact."},
+      tourist:{pts:150,name:"AI travel-guide day pass",cls:"teal",why:"Marco gets a same-day itinerary tool. He clears a surplus bento now and the guide routes him back through Nakameguro tomorrow."},
+      local:{pts:100,name:"1 month ad-free music streaming",cls:"teal",why:"Rie already visits often; the reward nudges her to take today's surplus batch instead of skipping. Full price paid, zero discount."}
+    },
+    omotenashi:{
+      student:{pts:110,name:"Free e-book: Tokyo neighborhood walks",cls:"amber",why:"Even a local student gets a cultural nudge to explore nearby SMEs on the Nakameguro stamp trail."},
+      tourist:{pts:200,name:"Culture pass — 3 local craft workshops",cls:"amber",why:"Marco is detected as inbound. The pass is funded by the Meguro tourism board and only redeems at independent local businesses within 2km — not chains."},
+      local:{pts:90,name:"Guided night-market audio tour",cls:"amber",why:"Rie hosts visiting friends often; the tour makes her the guide and sends the group to partner SMEs."}
+    },
+    stamp:{
+      student:{pts:130,name:"Stamp 3/5 — unlock café crawl finale",cls:"",why:"Aoi's digital eki-stamp book advances. Two more independent cafés and she unlocks a limited illustrated print plus bonus tokens."},
+      tourist:{pts:160,name:"Stamp 3/5 — collectible district stamp",cls:"",why:"Marco collects a Nakameguro stamp modeled on real railway eki-stamps. Completing the set unlocks a physical souvenir at a local shop."},
+      local:{pts:120,name:"Stamp 3/5 — regular's gold tier",cls:"",why:"Rie is close to the loyalty finale: a seasonal tasting event hosted across all five trail merchants."}
+    }
+  };
+
+  var state={mode:"mottainai",persona:"student",step:0,amount:"700",
+    covers:0,surplus:0,profiles:0,timer:null,secs:300,stamps:2};
+
+  var STEPS=[
+    {t:"Cashier enters amount",s:"Merchant App, no hardware"},
+    {t:"Dynamic QR generated",s:"5-min expiry · one-time · amount-locked"},
+    {t:"Customer scans QR",s:"Wallet app opens the payload"},
+    {t:"AI matches reward",s:"preference × goal × cost × conversion"},
+    {t:"Reward lands in wallet",s:"Kakehashi Token + partner unlock"},
+    {t:"Merchant gains retention + insight",s:"profile created, dashboard updates"}
+  ];
+
+  /* ---------- pseudo QR ---------- */
+  function drawQR(canvas,seed){
+    if(!canvas)return;
+    var n=25,px=canvas.width/n,ctx=canvas.getContext("2d");
+    ctx.fillStyle="#fff";ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#0d1626";
+    var h=0;for(var i=0;i<seed.length;i++){h=(h*131+seed.charCodeAt(i))>>>0;}
+    function rnd(){h^=h<<13;h>>>=0;h^=h>>17;h^=h<<5;h>>>=0;return h/4294967296;}
+    for(var y=0;y<n;y++)for(var x=0;x<n;x++){ if(rnd()>0.5) ctx.fillRect(x*px,y*px,px+.5,px+.5); }
+    // finder patterns
+    function finder(fx,fy){
+      ctx.fillStyle="#fff";ctx.fillRect(fx*px,fy*px,7*px,7*px);
+      ctx.fillStyle="#0d1626";ctx.fillRect(fx*px,fy*px,7*px,px);ctx.fillRect(fx*px,(fy+6)*px,7*px,px);
+      ctx.fillRect(fx*px,fy*px,px,7*px);ctx.fillRect((fx+6)*px,fy*px,px,7*px);
+      ctx.fillRect((fx+2)*px,(fy+2)*px,3*px,3*px);
+    }
+    finder(0,0);finder(n-7,0);finder(0,n-7);
+  }
+
+  /* ---------- render ---------- */
+  function renderFlow(){
+    var wrap=$("#flowSteps");wrap.innerHTML="";
+    STEPS.forEach(function(s,i){
+      var d=document.createElement("div");
+      d.className="fstep"+(i<state.step?" done":"")+(i===state.step?" active":"");
+      d.innerHTML='<span class="n">'+(i<state.step?"✓":(i+1))+'</span><span class="t">'+s.t+'<small>'+s.s+'</small></span>';
+      wrap.appendChild(d);
+    });
+  }
+
+  function persona(){return PERSONAS[state.persona];}
+  function reward(){
+    var m=state.mode==="stamp"?"stamp":state.mode;
+    return REWARDS[m][state.persona];
+  }
+
+  function renderMerchant(){
+    var b=$("#merchantBody"),p=persona();
+    if(state.step===0){
+      b.innerHTML=
+        '<div class="field"><label>Purchase amount</label>'+
+        '<div class="amount"><span>¥</span><input id="amtIn" inputmode="numeric" value="'+state.amount+'"></div></div>'+
+        '<div class="keypad" id="kp">'+[1,2,3,4,5,6,7,8,9,"C",0,"←"].map(function(k){return '<button data-k="'+k+'">'+k+'</button>'}).join("")+'</div>'+
+        (state.mode==="mottainai"?'<div class="aichip"><span class="dot"></span><span><b>AI alert:</b> 6 croissants + 3 bento projected unsold by 20:00. Mottainai campaign armed — reward triggers on this sale.</span></div>':'')+
+        (state.mode==="omotenashi"?'<div class="aichip"><span class="dot" style="background:var(--amber)"></span><span><b>Goal active:</b> capture inbound tourist spend, route to local SMEs within 2km. Tourism-board funded.</span></div>':'')+
+        (state.mode==="stamp"?'<div class="aichip"><span class="dot" style="background:var(--accent)"></span><span><b>Trail:</b> Kurumi Coffee is stop 3 of the Nakameguro café rally. Scanning adds a stamp.</span></div>':'')+
+        '<button class="btn accent" id="genBtn">Generate payment QR →</button>';
+      $("#amtIn").addEventListener("input",function(e){state.amount=e.target.value.replace(/[^0-9]/g,"")||"0"});
+      $("#kp").addEventListener("click",function(e){
+        var k=e.target.dataset.k;if(k===undefined)return;
+        if(k==="C")state.amount="0";
+        else if(k==="←")state.amount=state.amount.slice(0,-1)||"0";
+        else state.amount=(state.amount==="0"?"":state.amount)+k;
+        $("#amtIn").value=state.amount;
+      });
+      $("#genBtn").addEventListener("click",function(){goStep(1)});
+    } else if(state.step>=1 && state.step<=3){
+      var token="KKH·"+state.mode.toUpperCase().slice(0,4)+"·¥"+state.amount+"·"+Date.now().toString(36).slice(-5).toUpperCase();
+      b.innerHTML=
+        '<div class="qr-box">'+
+        '<canvas id="qrCanvas" width="200" height="200"></canvas>'+
+        '<div class="countdown" id="cd">expires in 5:00</div>'+
+        '<div class="metaline"><span>¥'+state.amount+' locked</span><span>one-time</span></div>'+
+        '<div class="metaline"><span>'+token+'</span></div>'+
+        '</div>'+
+        '<div class="aichip"><span class="dot"></span><span>Waiting for customer scan… QR is signed and amount-locked. A screenshot sent to a friend later is already invalid.</span></div>'+
+        (state.step===1?'<button class="btn" id="simScan">▶ Simulate customer scanning</button>':'<button class="btn" disabled>Customer is scanning…</button>');
+      drawQR($("#qrCanvas"),token);
+      startTimer();
+      if(state.step===1)$("#simScan").addEventListener("click",function(){goStep(2)});
+    } else {
+      var r=reward();
+      b.innerHTML=
+        '<div class="aichip"><span class="dot"></span><span><b>Transaction settled.</b> ¥'+state.amount+' · reward delivered to '+p.name+' · profile '+(state.step>=5?"created":"pending")+'.</span></div>'+
+        '<div class="card" style="box-shadow:none;padding:14px"><h4 style="font-size:13px;margin-bottom:8px">What the merchant now knows</h4>'+
+        '<div class="kpi"><span>Segment</span><b>'+p.meta+'</b></div>'+
+        '<div class="kpi"><span>Affinity</span><b>'+p.aff+'</b></div>'+
+        '<div class="kpi"><span>Reward accepted</span><b class="up">'+r.name+'</b></div>'+
+        '<div class="kpi"><span>Predicted return window</span><b>3–6 days</b></div></div>'+
+        (state.mode==="mottainai"?'<div class="aichip"><span class="dot" style="background:var(--teal)"></span><span>Surplus unit sold at full price. No closing-time markdown, no brand damage.</span></div>':'')+
+        (state.mode==="omotenashi"?'<div class="aichip"><span class="dot" style="background:var(--amber)"></span><span>Tourist spend logged for the Meguro tourism board dashboard. Reimbursement pending.</span></div>':'')+
+        (state.mode==="stamp"?'<div class="aichip"><span class="dot" style="background:var(--accent)"></span><span>Stamp '+state.stamps+'/5 issued. Customer needs 2 more independent cafés to unlock the finale.</span></div>':'')+
+        '<button class="btn ghost" id="againBtn">Run another transaction</button>';
+      stopTimer();
+      $("#againBtn").addEventListener("click",resetLoop);
+    }
+  }
+
+  function renderCustomer(){
+    var b=$("#customerBody"),p=persona(),r=reward();
+    $("#custRole").textContent="● Wallet — "+p.name;
+    $("#custMeta").textContent=p.meta;
+    var walletHist=
+      '<div class="walletlist">'+
+        '<div class="wrow"><span class="ico">📚</span><span class="grow">Manga — 5 chapters<br><span style="color:var(--muted)">2 days ago · Tsutaya Books</span></span><span class="pts">+80</span></div>'+
+        '<div class="wrow"><span class="ico">🎧</span><span class="grow">Music trial — 14 days<br><span style="color:var(--muted)">last week · Blue Note Café</span></span><span class="pts">+60</span></div>'+
+      '</div>';
+
+    if(state.step===0){
+      b.innerHTML=
+        '<div class="tokbar"><span style="font-size:20px">'+p.icon+'</span><div><div class="lbl">Kakehashi Token</div><div class="bal">340</div></div></div>'+
+        (state.mode==="stamp"?
+          '<div><div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Nakameguro café rally</div>'+
+          '<div class="stamps">'+[0,1,2,3,4].map(function(i){return '<div class="stamp'+(i<state.stamps?" filled":"")+'">'+(i<state.stamps?"●":(i+1))+'</div>'}).join("")+'</div></div>':"")+
+        '<div><div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 0 8px">Recent unlocks</div>'+walletHist+'</div>'+
+        '<div class="aichip"><span class="dot"></span><span>Pay at any Kakehashi merchant to earn. '+(p.tourist?"Tourist mode on — cultural rewards prioritized.":"Rewards matched to your taste: "+p.aff+".")+'</span></div>';
+    } else if(state.step===1){
+      b.innerHTML=
+        '<div class="scanview"><div style="font-weight:600;color:var(--ink)">Ready to pay</div>'+
+        '<div class="scanframe"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span></div>'+
+        '<div>Point at the merchant\'s QR code.</div>'+
+        '<div style="font-size:11px">Waiting for the cashier to generate it…</div></div>';
+    } else if(state.step===2){
+      b.innerHTML=
+        '<div class="scanview"><div style="font-weight:600;color:var(--ink)">Scanning…</div>'+
+        '<div class="scanframe"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span><span class="scanline"></span></div>'+
+        '<div>¥'+state.amount+' payment detected</div></div>';
+      setTimeout(function(){if(state.step===2)goStep(3)},1400);
+    } else if(state.step===3){
+      b.innerHTML=
+        '<div class="aichip"><span class="dot"></span><span><b>AI Reward Engine running…</b></span></div>'+
+        '<div class="card" style="box-shadow:none;padding:12px;font-size:12px">'+
+        '<div class="kpi"><span>your preference</span><b>'+p.aff+'</b></div>'+
+        '<div class="kpi"><span>merchant goal</span><b>'+(state.mode==="mottainai"?"clear surplus":state.mode==="omotenashi"?"route to local":"advance trail")+'</b></div>'+
+        '<div class="kpi"><span>reward cost</span><b>within partner budget</b></div>'+
+        '<div class="kpi"><span>conversion prob.</span><b>'+(p.tourist?"0.58":"0.66")+'</b></div></div>'+
+        '<div style="text-align:center;color:var(--muted);font-size:12px">matching best reward…</div>';
+      setTimeout(function(){if(state.step===3)goStep(4)},1500);
+    } else {
+      b.innerHTML=
+        '<div class="tokbar"><span style="font-size:20px">'+p.icon+'</span><div><div class="lbl">Kakehashi Token</div><div class="bal">'+(340+r.pts)+' <span style="font-size:11px;color:#8fe3c8">+'+r.pts+'</span></div></div></div>'+
+        '<div class="rewardcard"><div class="rc-top '+r.cls+'"><div class="pt">+'+r.pts+' Kakehashi Token · '+state.mode+'</div><div class="nm">'+r.name+'</div></div>'+
+        '<div class="rc-body">'+r.why+'</div></div>'+
+        (state.mode==="stamp"?
+          '<div class="stamps">'+[0,1,2,3,4].map(function(i){return '<div class="stamp'+(i<state.stamps?" filled":"")+'">'+(i<state.stamps?"●":(i+1))+'</div>'}).join("")+'</div>':"")+
+        '<button class="btn '+(r.cls==="teal"?"":r.cls==="amber"?"":"accent")+'" id="redeemBtn">Redeem now</button>'+
+        '<div style="font-size:11px;color:var(--muted);text-align:center">'+(p.tourist?"Redeems only at independent local businesses within 2km.":"Redeems in the partner app — pulls you back to "+"Kurumi Coffee within days.")+'</div>';
+      if(state.step===4){
+        $("#redeemBtn").addEventListener("click",function(){goStep(5);toast("Reward redeemed · profile created for the merchant");});
+      }
+    }
+  }
+
+  /* ---------- timer ---------- */
+  function startTimer(){
+    if(state.timer)return;
+    state.secs=300;
+    state.timer=setInterval(function(){
+      state.secs--;
+      var cd=$("#cd");
+      if(cd){
+        var m=Math.floor(state.secs/60),s=state.secs%60;
+        cd.textContent="expires in "+m+":"+(s<10?"0":"")+s;
+        cd.classList.toggle("warn",state.secs<60);
+      }
+      if(state.secs<=0){stopTimer();resetLoop();toast("QR expired — regenerate to continue");}
+    },1000);
+  }
+  function stopTimer(){clearInterval(state.timer);state.timer=null;}
+
+  /* ---------- transitions ---------- */
+  function goStep(n){
+    state.step=n;
+    if(n===5){
+      state.covers++;state.profiles++;
+      if(state.mode==="mottainai")state.surplus++;
+      if(state.mode==="stamp" && state.stamps<5)state.stamps++;
+      updateKPIs();
+    }
+    renderAll();
+  }
+  function resetLoop(){
+    stopTimer();state.step=0;state.amount="700";renderAll();
+  }
+  function updateKPIs(){
+    $("#k-covers").textContent=state.covers;
+    $("#k-surplus").textContent=state.surplus;
+    $("#k-profiles").textContent=state.profiles;
+    var rep=31+state.covers*3;
+    $("#k-repeat").textContent=Math.min(rep,58)+"%";
+  }
+  function renderAll(){renderFlow();renderMerchant();renderCustomer();}
+
+  /* ---------- controls ---------- */
+  $("#modeSeg").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    $$("#modeSeg button").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on");state.mode=b.dataset.m;
+    if(state.mode==="omotenashi" && !persona().tourist){setPersona("tourist");}
+    resetLoop();
+  });
+  function setPersona(p){
+    state.persona=p;
+    $$("#personaSel button").forEach(function(x){x.classList.toggle("on",x.dataset.p===p)});
+  }
+  $("#personaSel").addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    setPersona(b.dataset.p);resetLoop();
+  });
+  $("#resetBtn").addEventListener("click",resetLoop);
+
+  /* ---------- engine page ---------- */
+  var PREFS=["manga","AI tools","music","travel"];
+  var RNAMES={
+    manga:"3 free manga chapters — Shōnen Jump+",
+    "AI tools":"1 month Pro AI writing assistant",
+    music:"30-day ad-free music streaming",
+    travel:"AI travel-guide city pass"
+  };
+  function runEngine(){
+    var pref=PREFS[+$("#e-pref").value];
+    var bud=+$("#e-bud").value;
+    var cv=+$("#e-cv").value;
+    var goal=$("#e-goal").value;
+    $("#e-prefv").textContent=pref;
+    $("#e-budv").textContent="¥"+bud;
+    $("#e-cvv").textContent=cv+"%";
+    var pts=Math.round(bud*0.4);
+    $("#e-rpts").textContent="+"+pts+" Kakehashi Token";
+    $("#e-rname").textContent=RNAMES[pref];
+    var goalTxt={deadzone:"fills the 2–5PM gap",surplus:"moves surplus stock at full price",tourist:"pulls tourist spend to nearby SMEs",frequency:"raises regular visit frequency"}[goal];
+    $("#e-rwhy").textContent=RNAMES[pref]+" has near-zero marginal cost for the partner, high affinity for this customer, and redeems off-site — so it "+goalTxt+" without discounting the product.";
+    var lift=Math.round((cv/100)*(bud/300)*22);
+    $("#e-lift").textContent="+"+lift+"%";
+    $("#e-cac").textContent="¥"+bud+" vs ¥1,500";
+    var conf=Math.min(0.95,(cv/100)*0.7+(bud/500)*0.3).toFixed(2);
+    $("#e-conf").textContent=conf;
+  }
+  ["e-pref","e-bud","e-cv","e-goal"].forEach(function(id){
+    var el=$("#"+id);if(el)el.addEventListener("input",runEngine);
+  });
+
+  /* ---------- init ---------- */
+  renderAll();updateKPIs();runEngine();
+})();
+</script>
