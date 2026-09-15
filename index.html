@@ -413,9 +413,86 @@
   @media (prefers-reduced-motion:reduce){
     *{animation:none !important;transition:none !important;}
   }
+
+  /* ---------- landing ---------- */
+  .lwrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+  @media (min-width:900px){.lwrap{padding:0 36px;}}
+  .lnav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .lnav-in{display:flex;align-items:center;gap:16px;height:64px;max-width:1180px;margin:0 auto;padding:0 20px;}
+  @media (min-width:900px){.lnav-in{padding:0 36px;}}
+  .lbrand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;}
+  .lbrand .mark{width:30px;height:30px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;}
+  .lnavlinks{margin-left:auto;display:none;gap:22px;font-size:13px;font-weight:600;color:var(--muted);}
+  @media (min-width:760px){.lnavlinks{display:flex;}}
+  .lnavlinks a{color:var(--muted);text-decoration:none;}
+  .lnavlinks a:hover{color:var(--ink);}
+  .lcta{background:var(--accent);color:#fff;border:0;border-radius:11px;padding:10px 18px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+  .lhero{position:relative;overflow:hidden;border-radius:0;padding:64px 0 56px;}
+  @media (min-width:900px){.lhero{padding:96px 0 76px;}}
+  .lhero-bg{position:absolute;inset:0;z-index:-2;}
+  .lhero-bg img{width:100%;height:100%;object-fit:cover;}
+  .lhero-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(12,17,26,.94) 0%,rgba(15,24,44,.9) 55%,var(--bg) 100%);}
+  :root[data-theme="light"] .lhero-scrim,:root:not([data-theme="dark"]) .lhero-scrim{background:linear-gradient(180deg,rgba(12,17,26,.92) 0%,rgba(20,32,58,.86) 60%,var(--bg) 100%);}
+  .lkicker{color:#8FB1FF;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;}
+  .lh1{color:#fff;font-size:clamp(32px,6vw,54px);font-weight:800;letter-spacing:-0.02em;line-height:1.04;margin-top:16px;max-width:16ch;}
+  .lsub{color:#C7CEDD;font-size:15px;line-height:1.65;margin-top:16px;max-width:52ch;}
+  .lctarow{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;}
+  .lbtn{border:0;border-radius:12px;padding:14px 22px;font-size:13.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:9px;}
+  .lbtn.primary{background:var(--accent);color:#fff;}
+  .lbtn.ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);}
+  .ltags{display:flex;gap:18px;flex-wrap:wrap;margin-top:30px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8791A3;}
+  .ltags span{position:relative;padding-left:14px;}
+  .ltags span::before{content:"";position:absolute;left:0;top:50%;width:5px;height:5px;border-radius:50%;background:currentColor;transform:translateY(-50%);}
+
+  .lsection{padding:52px 0;}
+  .leyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+  .lh2{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-0.01em;margin-top:10px;max-width:22ch;line-height:1.2;}
+  .lp{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:60ch;line-height:1.65;}
+
+  .lstat4{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px;}
+  @media (min-width:700px){.lstat4{grid-template-columns:repeat(4,1fr);}}
+  .lstat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;}
+  .lstat .v{font-size:24px;font-weight:800;color:var(--accent);}
+  .lstat .l{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+  .lmodes{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px;}
+  @media (min-width:760px){.lmodes{grid-template-columns:repeat(3,1fr);}}
+  .lmode{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;}
+  .lmode .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+  .lmode .t{font-size:15.5px;font-weight:800;margin-top:14px;}
+  .lmode .d{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+
+  .lflow{display:flex;gap:0;overflow-x:auto;margin-top:30px;padding-bottom:6px;}
+  .lflow-step{flex:0 0 auto;width:150px;padding-right:18px;position:relative;}
+  .lflow-step:not(:last-child)::after{content:"";position:absolute;top:19px;left:52px;right:0;height:1.5px;background:var(--line);}
+  .lflow-n{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;position:relative;z-index:1;}
+  .lflow-t{font-size:12.5px;font-weight:700;margin-top:10px;}
+  .lflow-d{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+  .lpanel-dark{background:var(--ink);border-radius:20px;padding:32px 26px;color:var(--bg);margin-top:8px;}
+  @media (min-width:900px){.lpanel-dark{padding:40px;}}
+  .lpanel-dark .lh2{color:#fff;}
+  .lpartner-row{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .lpartner-row .badge{width:32px;height:32px;border-radius:50%;border:1.6px solid #fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:0 0 auto;}
+  .lpartner-row .d{font-size:12.5px;color:#A9AFBA;max-width:56ch;line-height:1.6;}
+
+  .lfoot{border-top:1px solid var(--line);padding:34px 0;}
+  .lfoot-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px;}
+  .lfoot .q{font-size:15px;font-weight:800;max-width:32ch;line-height:1.5;}
+  .lfoot .team{font-size:11.5px;color:var(--muted);line-height:1.7;}
+
+  @keyframes lFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .lhero>*{animation:lFade .5s ease both;}
+  .lhero .lsub{animation-delay:.05s;}
+  .lhero .lctarow{animation-delay:.1s;}
+  .lhero .ltags{animation-delay:.15s;}
+  @media (prefers-reduced-motion:reduce){.lhero>*{animation:none;}}
 </style>
 
-<div class="shell">
+<div id="landingRoot"></div>
+
+<div class="shell" id="appRoot" hidden>
   <aside class="sidenav" id="sidenav"></aside>
 
   <div class="main">
@@ -524,6 +601,7 @@ var ICONS={
 
 /* ---------------- state ---------------- */
 var state={
+  view:"landing",
   role:"customer",
   tab:"home",
   category:"all", feed:"nearby", showAll:false, saved:{}, persona:"student",
@@ -653,7 +731,7 @@ function setBiz(id){state.bizSection=id;render();}
 /* ---------------- render: nav ---------------- */
 function renderNav(){
   var tabs=currentTabs();
-  var side='<div class="brand"><span class="mark">K</span><span class="name">Kakehashi</span></div>'+
+  var side='<button class="brand" id="brandBack" style="border:0;background:none;cursor:pointer;padding:0;"><span class="mark">K</span><span class="name">Kakehashi</span></button>'+
     '<div class="rolepill"><button data-role="customer" class="'+(state.role==="customer"?"on":"")+'">Customer</button>'+
     '<button data-role="merchant" class="'+(state.role==="merchant"?"on":"")+'">Merchant</button></div>'+
     '<div class="navlist">'+tabs.map(function(t){
@@ -777,7 +855,7 @@ function renderProfileCustomer(){
     }).join("")+'</div></div>'+
   '</div>'+
   '<button class="signout" id="roleSwitchInline" style="color:var(--accent);border-color:var(--accent);margin-top:18px;max-width:1100px;">Switch to merchant view</button>'+
-  '<button class="signout" style="max-width:1100px;">Sign out</button>';
+  '<button class="signout" id="exitToLandingBtn" style="max-width:1100px;">Exit demo &amp; back to overview</button>';
 }
 function renderProfileMerchant(){
   return '<div class="h1">Profile</div>'+
@@ -793,7 +871,7 @@ function renderProfileMerchant(){
     }).join("")+'</div></div>'+
   '</div>'+
   '<button class="signout" id="roleSwitchInline" style="color:var(--accent);border-color:var(--accent);margin-top:18px;max-width:1100px;">Switch to customer view</button>'+
-  '<button class="signout" style="max-width:1100px;">Sign out</button>';
+  '<button class="signout" id="exitToLandingBtn" style="max-width:1100px;">Exit demo &amp; back to overview</button>';
 }
 
 /* ---------------- render: company (shared) ---------------- */
@@ -977,6 +1055,82 @@ function renderFlowModal(){
     '<div class="modal-body">'+body+'</div></div></div>';
 }
 
+/* ---------------- render: landing ---------------- */
+function launchApp(role){
+  state.view="app";state.role=role;state.tab=role==="customer"?"home":"dashboard";
+  render();window.scrollTo({top:0,behavior:"smooth"});
+}
+function exitToLanding(){state.view="landing";render();window.scrollTo({top:0,behavior:"smooth"});}
+
+function renderLanding(){
+  var modeIcons={
+    mottainai:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>',
+    omotenashi:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>',
+    stamp:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>'
+  };
+  var modeTitle={mottainai:"Mottainai Mode",omotenashi:"Omotenashi Mode",stamp:"Digital Stamp Rally"};
+  var lmodes=["mottainai","omotenashi","stamp"].map(function(m){
+    var c=CAT[m];
+    return '<div class="lmode"><div class="ic" style="background:'+c.bg+';color:'+c.fg+'">'+modeIcons[m]+'</div><div class="t">'+modeTitle[m]+'</div><div class="d">'+MODE_DESC[m]+'</div></div>';
+  }).join("");
+
+  var flowSteps=[
+    {n:"1",t:"Purchase",d:"Coffee, food, retail or hotel"},
+    {n:"2",t:"Earn",d:"Universal Kakehashi Token"},
+    {n:"3",t:"AI match",d:"Who are you? What do you value?"},
+    {n:"4",t:"Unlock",d:"Music, manga, travel, AI tools"},
+    {n:"5",t:"Return",d:"Merchant gains retention + insight"}
+  ];
+  var lflow=flowSteps.map(function(s){
+    return '<div class="lflow-step"><div class="lflow-n">'+s.n+'</div><div class="lflow-t">'+s.t+'</div><div class="lflow-d">'+s.d+'</div></div>';
+  }).join("");
+
+  var lstats=OVERVIEW_STATS.map(function(s){return '<div class="lstat"><div class="v">'+s.v+'</div><div class="l">'+s.l+'</div></div>';}).join("");
+
+  return ''+
+  '<nav class="lnav"><div class="lnav-in"><div class="lbrand"><span class="mark">K</span>Kakehashi</div>'+
+  '<div class="lnavlinks"><a href="#lproblem">Problem</a><a href="#lsolution">Solution</a><a href="#lhow">How it works</a><a href="#lpartner">Rakuten</a></div>'+
+  '<button class="lcta" data-launch="customer">Launch demo</button></div></nav>'+
+
+  '<header class="lhero"><div class="lhero-bg"><img src="photos/hero-desktop.jpg" alt=""></div><div class="lhero-scrim"></div>'+
+    '<div class="lwrap"><div class="lkicker">AI-Powered Reward Infrastructure for Japan\'s Physical Economy</div>'+
+    '<div class="lh1">Turning every purchase into an experience</div>'+
+    '<div class="lsub">Kakehashi gives Japan\'s 800,000+ independent cafés and restaurants the same AI-personalized loyalty that only chains like Starbucks can afford today — funded by digital partners, not merchants.</div>'+
+    '<div class="lctarow"><button class="lbtn primary" data-launch="customer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg>Try it as a customer</button>'+
+    '<button class="lbtn ghost" data-launch="merchant"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V5.5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Try it as a merchant</button></div>'+
+    '<div class="ltags"><span>B2B SaaS</span><span>AI</span><span>F&amp;B</span><span>Tourism</span><span>ESG</span></div></div></header>'+
+
+  '<section class="lsection" id="lproblem"><div class="lwrap"><div class="leyebrow">The problem</div>'+
+    '<div class="lh2">Japan\'s SMEs are losing the loyalty battle.</div>'+
+    '<div class="lp">Chains have apps, data and points. Independent cafés and restaurants have nothing — and customers slowly drift away. Traditional loyalty systems are either too expensive for SMEs or too generic to matter.</div>'+
+    '<div class="lstat4">'+lstats+'</div></div></section>'+
+
+  '<section class="lsection" id="lsolution" style="background:var(--panel-2);"><div class="lwrap"><div class="leyebrow">The solution</div>'+
+    '<div class="lh2">One platform. Three modes. One AI engine.</div>'+
+    '<div class="lp">Every physical purchase becomes a personalized digital experience — matched to who the customer is and what the merchant needs right now.</div>'+
+    '<div class="lmodes">'+lmodes+'</div></div></section>'+
+
+  '<section class="lsection" id="lhow"><div class="lwrap"><div class="leyebrow">How it works</div>'+
+    '<div class="lh2">From a ¥700 purchase to a personalized reward.</div>'+
+    '<div class="lflow">'+lflow+'</div></div></section>'+
+
+  '<section class="lsection" id="lpartner"><div class="lwrap"><div class="lpanel-dark"><div class="leyebrow" style="color:#8FB1FF;">The Rakuten partnership</div>'+
+    '<div class="lh2">We don\'t replace Rakuten. We complete it.</div>'+
+    '<div class="lpartner-row"><span class="badge">R</span><div class="d">Rakuten Points has 117M+ members but no infrastructure for physical SME onboarding. Kakehashi fills that gap — and becomes Rakuten\'s acquisition channel into 800,000 independent businesses.</div></div>'+
+    '</div></div></section>'+
+
+  '<section class="lsection"><div class="lwrap" style="text-align:center;">'+
+    '<div class="lh2" style="margin:0 auto;">See the full loop for yourself.</div>'+
+    '<div class="lp" style="margin:10px auto 0;">A live, clickable prototype — pay as a customer or run a sale as a merchant.</div>'+
+    '<div class="lctarow" style="justify-content:center;margin-top:22px;">'+
+    '<button class="lbtn primary" style="background:var(--accent);" data-launch="customer">Launch the demo</button></div></div></section>'+
+
+  '<footer class="lfoot"><div class="lwrap"><div class="lfoot-row">'+
+    '<div class="q">"Spend locally to unlock experiences" — not spend more to get discounts.</div>'+
+    '<div class="team">Felicia Annabel Ruriyanto &amp; Lifkie Lie<br>Business Case Competition 2026</div>'+
+  '</div></div></footer>';
+}
+
 /* ---------------- master render ---------------- */
 function renderContent(){
   if(state.role==="customer"){
@@ -994,6 +1148,14 @@ function renderContent(){
   return "";
 }
 function render(){
+  if(state.view==="landing"){
+    $("#appRoot").hidden=true;
+    $("#landingRoot").innerHTML=renderLanding();
+    $("#modalRoot").innerHTML="";
+    return;
+  }
+  $("#appRoot").hidden=false;
+  $("#landingRoot").innerHTML="";
   renderNav();
   $("#content").innerHTML='<div class="kh-in">'+renderContent()+'</div>';
   $("#modalRoot").innerHTML=renderDetailModal()+renderFlowModal();
@@ -1002,6 +1164,9 @@ function render(){
 /* ---------------- events ---------------- */
 document.addEventListener("click",function(e){
   var t;
+  if((t=e.target.closest("[data-launch]"))){launchApp(t.dataset.launch);return;}
+  if((t=e.target.closest("#brandBack"))){exitToLanding();return;}
+  if((t=e.target.closest("#exitToLandingBtn"))){exitToLanding();return;}
   if((t=e.target.closest("[data-role]"))){ if(t.dataset.role!==state.role) switchRole(); return; }
   if((t=e.target.closest("#roleSwitchBtn"))){ switchRole(); return; }
   if((t=e.target.closest("#roleSwitchInline"))){ switchRole(); return; }
