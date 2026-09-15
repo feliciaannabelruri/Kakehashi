@@ -30,48 +30,52 @@
   img{display:block}
   ::-webkit-scrollbar{width:8px;height:8px}
   ::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  a{color:var(--accent)} a:hover{color:var(--accent-2)}
 
   .shell{display:flex;min-height:100vh}
   .sidenav{display:none}
   .bottomnav{display:flex}
-
   @media (min-width:900px){
     .shell{max-width:1440px;margin:0 auto}
     .sidenav{display:flex}
     .bottomnav{display:none}
   }
 
-  /* ---------- sidenav (desktop) ---------- */
   .sidenav{width:236px;flex:0 0 auto;background:var(--panel);border-right:1px solid var(--line);flex-direction:column;padding:24px 16px;position:sticky;top:0;height:100vh;}
   .brand{display:flex;align-items:center;gap:10px;padding:0 8px;}
   .brand .mark{width:34px;height:34px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex:0 0 auto;}
   .brand .name{font-size:15px;font-weight:800;letter-spacing:-0.01em;}
+  .rolepill{display:flex;gap:3px;background:var(--panel-2);border-radius:11px;padding:3px;margin-top:18px;}
+  .rolepill button{flex:1;border:0;background:transparent;padding:8px 4px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--muted);}
+  .rolepill button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06);}
+  .navlist{display:flex;flex-direction:column;gap:2px;margin-top:16px;}
   .navitem{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;border:0;background:transparent;cursor:pointer;text-align:left;width:100%;color:var(--muted);font-size:13px;font-weight:500;}
   .navitem svg{flex:0 0 auto}
   .navitem.on{background:var(--panel-2);color:var(--ink);font-weight:700;}
-  .navcta{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer;}
-  .navprofile{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--panel-2);}
+  .navcta{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer;}
+  .navprofile{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--panel-2);cursor:pointer;border:0;text-align:left;width:100%;}
   .navprofile img{width:32px;height:32px;border-radius:10px;object-fit:cover;}
 
-  /* ---------- bottomnav (mobile) ---------- */
   .bottomnav{position:fixed;left:0;right:0;bottom:0;height:78px;background:var(--panel);border-top:1px solid var(--line);align-items:center;padding:0 8px;z-index:15;}
   .bnitem{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;color:var(--muted);font-size:9.5px;font-weight:500;}
   .bnitem.on{color:var(--accent);font-weight:700;}
   .bnfab{flex:0 0 auto;width:52px;height:52px;border-radius:16px;background:var(--accent);border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 6px;box-shadow:0 8px 18px -6px rgba(42,92,240,.55);}
+  .bnfab:disabled{opacity:.4;cursor:not-allowed;}
 
-  /* ---------- main / topbar ---------- */
   .main{flex:1;min-width:0;}
-  .topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:24px 20px 0;}
+  .topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:24px 20px 0;}
   @media (min-width:900px){.topbar{padding:28px 36px 0;}}
-  .who{display:flex;align-items:center;gap:11px;flex:1 1 200px;}
+  .who{display:flex;align-items:center;gap:11px;flex:1 1 200px;background:none;border:0;cursor:pointer;text-align:left;padding:2px;}
   .who img{width:40px;height:40px;border-radius:12px;object-fit:cover;flex:0 0 auto;}
   .who .g{font-size:12px;color:var(--muted);font-weight:500;}
-  .who .n{font-size:15px;font-weight:800;}
-  .searchwrap{display:flex;align-items:center;gap:10px;flex:2 1 260px;}
+  .who .n{font-size:15px;font-weight:800;color:var(--ink);}
+  .searchwrap{display:flex;align-items:center;gap:8px;flex:2 1 220px;}
   .search{flex:1;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;}
   .search span{font-size:13px;color:var(--muted);}
-  .bell{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex:0 0 auto;}
-  .bell .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--stp);border:1.5px solid var(--panel);}
+  .topbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex:0 0 auto;color:var(--ink);}
+  .topbtn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--stp);border:1.5px solid var(--panel);}
+  .roleswitch{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:9px 13px;cursor:pointer;font-size:11.5px;font-weight:700;color:var(--ink);flex:0 0 auto;}
+  .roleswitch svg{flex:0 0 auto}
 
   .content{padding:20px;max-width:1180px;}
   @media (min-width:900px){.content{padding:24px 36px 48px;}}
@@ -80,6 +84,8 @@
   .h1{font-size:19px;font-weight:800;}
   @media (min-width:900px){.h1{font-size:22px;}}
   .sub{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .backrow{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+  .backbtn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);}
 
   .pills{display:flex;gap:8px;overflow-x:auto;padding:16px 0 2px;}
   .pill{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid var(--line);background:var(--panel);color:var(--ink-soft);font-size:12.5px;font-weight:600;cursor:pointer;}
@@ -89,13 +95,13 @@
   .pill.on.stp{background:var(--stp);border-color:var(--stp);color:#fff}
   .pill.on.rak{background:var(--rak);border-color:var(--rak);color:#fff}
 
-  .promo{margin-top:16px;border-radius:18px;padding:22px;position:relative;overflow:hidden;min-height:140px;display:flex;align-items:center;}
+  .promo{margin-top:16px;border-radius:18px;padding:22px;position:relative;overflow:hidden;min-height:140px;display:flex;align-items:center;cursor:pointer;border:0;text-align:left;width:100%;}
   .promo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .promo .scrim{position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,26,74,.88) 10%,rgba(42,92,240,.7) 100%);}
   .promo .txt{position:relative;color:#fff;}
   .promo .kick{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#DCE6FF;}
   .promo .head{font-size:18px;font-weight:800;margin-top:6px;line-height:1.25;max-width:260px;}
-  .promo button{margin-top:14px;background:#fff;color:var(--accent);border:0;border-radius:10px;padding:10px 16px;font-size:12.5px;font-weight:700;cursor:pointer;}
+  .promo .cta{margin-top:14px;background:#fff;color:var(--accent);border:0;border-radius:10px;padding:10px 16px;font-size:12.5px;font-weight:700;display:inline-block;}
 
   .homehero{display:block;}
   @media (min-width:900px){.homehero{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:stretch;}}
@@ -118,7 +124,8 @@
   .reward-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px;}
   @media (min-width:640px){.reward-grid{grid-template-columns:repeat(2,1fr);}}
   @media (min-width:900px){.reward-grid{grid-template-columns:repeat(3,1fr);gap:14px;}}
-  .rcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .rcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;border-width:1px;border-style:solid;padding:0;font:inherit;color:inherit;transition:transform .12s,box-shadow .12s;}
+  .rcard:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(20,24,31,.25);}
   .rcard .ph{position:relative;height:118px;}
   .rcard .ph img{width:100%;height:100%;object-fit:cover;}
   .rcard .ph .tint{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.16;}
@@ -161,6 +168,8 @@
   .hrow .m .t{font-size:12.5px;font-weight:700;}
   .hrow .m .s{font-size:11px;color:var(--muted);margin-top:2px;}
   .hrow .p{font-size:12.5px;font-weight:800;color:var(--mot);}
+  .hrow .p.neg{color:var(--ink-soft);}
+  .empty{padding:28px 18px;text-align:center;color:var(--muted);font-size:12.5px;background:var(--panel);border:1px dashed var(--line);border-radius:14px;}
 
   .bizchips{display:flex;gap:7px;overflow-x:auto;margin-top:18px;padding-bottom:2px;}
   .bizchip{flex:0 0 auto;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12.5px;font-weight:700;cursor:pointer;}
@@ -246,13 +255,96 @@
   .closing{background:var(--panel-2);border-radius:14px;padding:22px;margin-top:16px;text-align:center;max-width:1100px;}
   .closing .q{font-size:15px;font-weight:800;line-height:1.6;}
 
-  .pay-overlay{position:fixed;inset:0;background:rgba(20,24,31,.5);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px;}
-  .pay-card{width:100%;max-width:420px;background:var(--bg);border-radius:22px;padding:24px;position:relative;max-height:92vh;overflow-y:auto;}
-  @media (max-width:520px){.pay-overlay{align-items:flex-end;padding:0;}.pay-card{max-width:100%;border-radius:22px 22px 0 0;}}
-  .pay-head{display:flex;align-items:center;justify-content:space-between;}
-  .pay-head .t{font-size:14.5px;font-weight:800;}
-  .xbtn{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;cursor:pointer;}
-  .pay-body{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:18px;}
+  /* ---------- profile ---------- */
+  .profhead{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;}
+  .profhead img{width:60px;height:60px;border-radius:16px;object-fit:cover;flex:0 0 auto;}
+  .profhead .n{font-size:16px;font-weight:800;}
+  .profhead .s{font-size:12px;color:var(--muted);margin-top:3px;}
+  .profgrid{display:block;max-width:1100px;}
+  @media (min-width:720px){.profgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}}
+  .settingsrow{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:12.5px;font-weight:600;cursor:pointer;}
+  .settingsrow + .settingsrow{margin-top:8px;}
+  .settingslist{margin-top:12px;}
+  .savedgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;}
+  .savedmini{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;}
+  .savedmini img{width:100%;height:64px;object-fit:cover;}
+  .savedmini .b{padding:9px 10px;}
+  .savedmini .t{font-size:11.5px;font-weight:700;line-height:1.3;}
+  .planrow{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:12px;}
+  .planrow .t{font-size:13px;font-weight:700;}
+  .planrow .p{font-size:17px;font-weight:800;color:var(--accent);margin-top:4px;}
+  .planrow button{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;}
+  .signout{margin-top:16px;width:100%;background:none;border:1px solid var(--line);border-radius:12px;padding:12px 0;font-size:13px;font-weight:700;cursor:pointer;color:var(--stp);}
+
+  /* ---------- onboarding ---------- */
+  .obwrap{max-width:520px;}
+  .obprogress{display:flex;gap:6px;margin:6px 0 22px;}
+  .obprogress div{flex:1;height:4px;border-radius:3px;background:var(--line);}
+  .obprogress div.on{background:var(--accent);}
+  .obcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;}
+  .obcard .lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+  .obfield{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--ink);background:var(--panel-2);margin-bottom:14px;}
+  .obcatgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  .obcat{border:1.6px solid var(--line);border-radius:12px;padding:12px;font-size:12.5px;font-weight:700;cursor:pointer;background:var(--panel);text-align:center;color:var(--ink-soft);}
+  .obcat.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft,#EDF1FE);}
+  .obtier{border:1.6px solid var(--line);border-radius:14px;padding:15px;cursor:pointer;margin-bottom:10px;}
+  .obtier.on{border-color:var(--accent);background:var(--panel-2);}
+  .obtier .t{font-size:13.5px;font-weight:800;}
+  .obtier .d{font-size:11.5px;color:var(--muted);margin-top:4px;}
+  .obmode{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:9px;}
+  .obmode .t{font-size:13px;font-weight:700;}
+  .toggle{width:42px;height:24px;border-radius:14px;background:var(--line);position:relative;cursor:pointer;flex:0 0 auto;border:0;}
+  .toggle.on{background:var(--accent);}
+  .toggle .dot{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s;}
+  .toggle.on .dot{transform:translateX(18px);}
+  .obnav{display:flex;gap:10px;margin-top:18px;}
+  .obnav button{flex:1;border:0;border-radius:12px;padding:13px 0;font-size:13px;font-weight:700;cursor:pointer;}
+  .obback{background:var(--panel-2);color:var(--ink);}
+  .obnext{background:var(--accent);color:#fff;}
+  .oblive{text-align:center;padding:8px;}
+  .oblive img{width:100%;height:150px;object-fit:cover;border-radius:16px;}
+  .oblive .check{width:56px;height:56px;border-radius:50%;background:var(--mot);display:flex;align-items:center;justify-content:center;margin:-28px auto 0;position:relative;border:4px solid var(--panel);}
+  .oblive .t{font-size:17px;font-weight:800;margin-top:14px;}
+  .oblive .d{font-size:12.5px;color:var(--muted);margin-top:6px;}
+
+  /* ---------- merchant dashboard ---------- */
+  .dashhero{position:relative;border-radius:18px;overflow:hidden;height:150px;display:flex;align-items:flex-end;padding:18px;}
+  .dashhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .dashhero .scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,24,31,.85) 0%,rgba(20,24,31,.1) 65%);}
+  .dashhero .tx{position:relative;color:#fff;}
+  .dashhero .live{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;background:rgba(27,143,114,.9);padding:4px 9px;border-radius:999px;margin-bottom:6px;}
+  .dashhero .live .d{width:6px;height:6px;border-radius:50%;background:#fff;}
+  .dashhero .nm{font-size:19px;font-weight:800;}
+  .dashhero .ad{font-size:11.5px;color:#D8DCE6;margin-top:3px;}
+  .dashcta{margin-top:16px;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:13px 20px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .dashcta:disabled{opacity:.5;cursor:not-allowed;}
+
+  .campgrid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px;max-width:900px;}
+  @media (min-width:720px){.campgrid{grid-template-columns:repeat(3,1fr);}}
+  .campcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;}
+  .campcard .top{display:flex;align-items:flex-start;justify-content:space-between;}
+  .campcard .mt{font-size:14.5px;font-weight:800;margin-top:12px;}
+  .campcard .md{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.55;}
+  .campcard .state{font-size:11px;font-weight:700;margin-top:12px;}
+
+  /* ---------- keypad ---------- */
+  .amountbox{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--panel-2);width:100%;}
+  .amountbox span{font-size:20px;color:var(--muted);}
+  .amountbox .val{font-family:"Plus Jakarta Sans";font-weight:800;font-size:26px;flex:1;text-align:left;}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:12px;}
+  .keypad button{font:inherit;font-size:16px;font-weight:600;padding:13px 0;border:1px solid var(--line);background:var(--panel);border-radius:10px;cursor:pointer;color:var(--ink);}
+  .personarow{display:flex;gap:6px;width:100%;margin-top:12px;flex-wrap:wrap;justify-content:center;}
+  .personarow button{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 12px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--ink-soft);}
+  .personarow button.on{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+
+  /* ---------- overlays ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(20,24,31,.5);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px;}
+  .modal-card{width:100%;max-width:420px;background:var(--bg);border-radius:22px;padding:24px;position:relative;max-height:92vh;overflow-y:auto;}
+  @media (max-width:520px){.modal-overlay{align-items:flex-end;padding:0;}.modal-card{max-width:100%;border-radius:22px 22px 0 0;}}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;}
+  .modal-head .t{font-size:14.5px;font-weight:800;}
+  .xbtn{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;}
+  .modal-body{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:18px;}
   .qrbox{width:200px;height:200px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:15px;}
   .qrgrid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(12,1fr);gap:1px;width:100%;height:100%;}
   .qrgrid div{border-radius:1px;}
@@ -274,46 +366,68 @@
   .rakline{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--muted);}
   .redeembtn{margin-top:18px;width:100%;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:700;cursor:pointer;}
 
+  .detail-hero{width:100%;height:170px;border-radius:14px;overflow:hidden;position:relative;}
+  .detail-hero img{width:100%;height:100%;object-fit:cover;}
+  .detail-hero .tag{position:absolute;left:10px;bottom:10px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,.94);}
+  .detail-pts{font-size:26px;font-weight:800;color:var(--accent);margin-top:14px;}
+  .detail-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:10px;text-align:left;}
+  .detail-meta{display:flex;justify-content:space-between;width:100%;margin-top:14px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(16px);opacity:0;transition:.25s;background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;font-size:12.5px;font-weight:600;z-index:80;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
   @media (prefers-reduced-motion:reduce){.scanline{animation:none;top:96px;}}
   [hidden]{display:none !important}
+
+  /* ---------- touch feel & motion ---------- */
+  *{-webkit-tap-highlight-color:transparent;}
+  button,.rcard,.pill,.navitem,.bnitem,.bizchip,.obcat,.obtier,.savedmini,.settingsrow,.who,.roleswitch,.topbtn,.heart,.xbtn,.promo,.keypad button,.personarow button,.rolepill button,.seg button{
+    touch-action:manipulation;
+    transition:transform .1s ease,opacity .12s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease;
+  }
+  button:active,.rcard:active,.pill:active,.bizchip:active,.obcat:active,.obtier:active,.savedmini:active,.settingsrow:active,.keypad button:active,.personarow button:active,.seg button:active,.bnitem:active,.navitem:active{
+    transform:scale(.96);
+    opacity:.85;
+  }
+  .bnfab:active{transform:scale(.92);}
+  .heart:active,.xbtn:active,.backbtn:active,.topbtn:active{transform:scale(.88);}
+  .toggle{height:28px;width:46px;}
+  .toggle .dot{width:24px;height:24px;}
+  .toggle.on .dot{transform:translateX(18px);}
+  .toggle:active{transform:scale(.95);}
+  .heart{width:32px;height:32px;}
+  .xbtn{width:36px;height:36px;}
+  .bnitem,.navitem{min-height:44px;}
+  .obcat,.settingsrow,.bizchip,.pill{min-height:38px;display:flex;align-items:center;justify-content:center;}
+  .settingsrow{justify-content:space-between;}
+
+  @keyframes khFadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes khSlideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes khPop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+  .kh-in{animation:khFadeIn .22s ease both;}
+  .modal-overlay{animation:khFadeIn .18s ease both;}
+  .modal-card{animation:khSlideUp .26s cubic-bezier(.22,.9,.32,1.15) both;}
+  .rcard{animation:khPop .22s ease both;}
+  .stattile,.revcard,.phasecard,.scard{animation:khFadeIn .25s ease both;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+  }
 </style>
 
 <div class="shell">
-  <aside class="sidenav">
-    <div class="brand"><span class="mark">K</span><span class="name">Kakehashi</span></div>
-    <div style="display:flex;flex-direction:column;gap:2px;margin-top:28px;">
-      <button class="navitem" data-tab="home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</button>
-      <button class="navitem" data-tab="modes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>Reward modes</button>
-      <button class="navitem" data-tab="wallet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.4"/><path d="M2.5 10h19"/></svg>Wallet</button>
-      <button class="navitem" data-tab="business"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V5.5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Business</button>
-    </div>
-    <button class="navcta" id="sideCta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg>Simulate a payment</button>
-    <div style="flex:1"></div>
-    <div class="navprofile"><img src="photos/avatar-aoi.jpg" alt=""><div><div style="font-size:12px;font-weight:700;">Aoi Tanaka</div><div style="font-size:10.5px;color:var(--muted);">Consumer account</div></div></div>
-  </aside>
+  <aside class="sidenav" id="sidenav"></aside>
 
   <div class="main">
-    <div class="topbar">
-      <div class="who"><img src="photos/avatar-aoi.jpg" alt=""><div><div class="g">Good afternoon</div><div class="n">Aoi Tanaka</div></div></div>
-      <div class="searchwrap">
-        <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>Search cafés, rewards&hellip;</span></div>
-        <button class="bell"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
-      </div>
-    </div>
-
+    <div class="topbar" id="topbar"></div>
     <div class="content mobile-pad" id="content"></div>
   </div>
 
-  <nav class="bottomnav">
-    <button class="bnitem" data-tab="home"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</button>
-    <button class="bnitem" data-tab="modes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>Modes</button>
-    <button class="bnfab" id="bnPay"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg></button>
-    <button class="bnitem" data-tab="wallet"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.4"/><path d="M2.5 10h19"/></svg>Wallet</button>
-    <button class="bnitem" data-tab="business"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V5.5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Business</button>
-  </nav>
+  <nav class="bottomnav" id="bottomnav"></nav>
 </div>
 
-<div class="pay-overlay" id="payOverlay" hidden></div>
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
@@ -322,6 +436,7 @@ var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var esc=function(s){return String(s).replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;"})};
 
+/* ---------------- data ---------------- */
 var CAT = {
   mottainai:{fg:"var(--mot)",bg:"var(--mot-bg)",label:"Mottainai"},
   omotenashi:{fg:"var(--omo)",bg:"var(--omo-bg)",label:"Omotenashi"},
@@ -329,13 +444,20 @@ var CAT = {
   rakuten:{fg:"var(--rak)",bg:"var(--rak-bg)",label:"Rakuten"}
 };
 var CATALOG=[
-  {id:"c1",cat:"mottainai",title:"3 free manga chapters",merchant:"Kurumi Coffee",dist:"0.3 km",distVal:.3,pts:120,img:"photos/reward-manga.jpg"},
-  {id:"c2",cat:"omotenashi",title:"Culture pass, 3 workshops",merchant:"Meguro Tourism Board",dist:"0.6 km",distVal:.6,pts:200,img:"photos/reward-culture.jpg"},
-  {id:"c3",cat:"stamp",title:"Café crawl, stamp 3 of 5",merchant:"Nakameguro Trail",dist:"0.4 km",distVal:.4,pts:130,img:"photos/reward-stamp.jpg"},
-  {id:"c4",cat:"rakuten",title:"500 Rakuten Points bonus",merchant:"Ichiba partner cafés",dist:"0.2 km",distVal:.2,pts:150,img:"photos/reward-rakuten.jpg"},
-  {id:"c5",cat:"mottainai",title:"30-day music streaming",merchant:"Blue Note Café",dist:"0.8 km",distVal:.8,pts:100,img:"photos/reward-music.jpg"},
-  {id:"c6",cat:"omotenashi",title:"Guided night-market audio tour",merchant:"Ebisu Yokocho",dist:"1.1 km",distVal:1.1,pts:90,img:"photos/reward-audio.jpg"},
-  {id:"c7",cat:"stamp",title:"AI travel-guide day pass",merchant:"Nakameguro Trail",dist:"0.5 km",distVal:.5,pts:150,img:"photos/reward-travel.jpg"}
+  {id:"c1",cat:"mottainai",title:"3 free manga chapters",merchant:"Kurumi Coffee",dist:"0.3 km",distVal:.3,pts:120,img:"photos/reward-manga.jpg",
+    detail:"Redeem 3 chapters of your choice on Shōnen Jump+. Delivered instantly to your linked manga account.",expiry:"Valid 14 days"},
+  {id:"c2",cat:"omotenashi",title:"Culture pass, 3 workshops",merchant:"Meguro Tourism Board",dist:"0.6 km",distVal:.6,pts:200,img:"photos/reward-culture.jpg",
+    detail:"Join three hands-on craft workshops curated by the Meguro Tourism Board — indigo dyeing, pottery and tea ceremony.",expiry:"Valid 30 days"},
+  {id:"c3",cat:"stamp",title:"Café crawl, stamp 3 of 5",merchant:"Nakameguro Trail",dist:"0.4 km",distVal:.4,pts:130,img:"photos/reward-stamp.jpg",
+    detail:"Collect this stamp toward your Nakameguro café crawl. Two more stops unlock the finale print.",expiry:"Trail resets seasonally"},
+  {id:"c4",cat:"rakuten",title:"500 Rakuten Points bonus",merchant:"Ichiba partner cafés",dist:"0.2 km",distVal:.2,pts:150,img:"photos/reward-rakuten.jpg",
+    detail:"500 Rakuten Points credited directly to your Rakuten account within 24 hours.",expiry:"Valid 90 days"},
+  {id:"c5",cat:"mottainai",title:"30-day music streaming",merchant:"Blue Note Café",dist:"0.8 km",distVal:.8,pts:100,img:"photos/reward-music.jpg",
+    detail:"30 days of ad-free music streaming, redeemable in-app immediately.",expiry:"Valid 14 days"},
+  {id:"c6",cat:"omotenashi",title:"Guided night-market audio tour",merchant:"Ebisu Yokocho",dist:"1.1 km",distVal:1.1,pts:90,img:"photos/reward-audio.jpg",
+    detail:"A 90-minute guided audio tour of Ebisu Yokocho's night market, narrated in English and Japanese.",expiry:"Valid 30 days"},
+  {id:"c7",cat:"stamp",title:"AI travel-guide day pass",merchant:"Nakameguro Trail",dist:"0.5 km",distVal:.5,pts:150,img:"photos/reward-travel.jpg",
+    detail:"An AI-built day itinerary around Nakameguro, tuned to your interests.",expiry:"Valid 7 days"}
 ];
 var PERSONAS={student:{name:"Aoi",affinity:"Manga"},tourist:{name:"Marco",affinity:"Travel guides"},local:{name:"Rie",affinity:"Music"}};
 var PERSONA_ORDER=["student","tourist","local"];
@@ -359,6 +481,11 @@ var REWARDS={
 var MODE_LABEL={mottainai:"Mottainai reward",omotenashi:"Omotenashi reward",stamp:"Stamp Rally"};
 var MODE_GOAL={mottainai:"Clear surplus stock",omotenashi:"Route spend to locals",stamp:"Advance the trail"};
 var MODE_ACCENT={mottainai:"var(--mot)",omotenashi:"var(--omo)",stamp:"var(--stp)"};
+var MODE_DESC={
+  mottainai:"Spots surplus stock before close and offers a reward that sells it at full price. No markdowns, no brand damage.",
+  omotenashi:"Recognizes an inbound tourist and routes their spending to independent local shops nearby, funded by tourism boards.",
+  stamp:"A modern take on eki-stamp culture. Collect across merchants to unlock escalating experiences."
+};
 
 var BIZ_LIST=[{id:"overview",label:"Overview"},{id:"partnership",label:"Rakuten"},{id:"revenue",label:"Revenue"},{id:"market",label:"Market"},{id:"adoption",label:"Adoption"},{id:"roadmap",label:"Roadmap"},{id:"scaleup",label:"Scale-Up"}];
 var OVERVIEW_STATS=[{v:"800K+",l:"F&B SMEs, no loyalty tech"},{v:"4.61M t",l:"food waste yearly"},{v:"42.7M",l:"tourists in 2025"},{v:"58%",l:"cashless, target 65% by 2030"}];
@@ -374,11 +501,45 @@ var PHASES=[{n:"Phase 1",t:"MVP Launch",w:"Q1–Q2 2026",merchants:"50 · Tokyo"
 var BUDGET_POINTS=["Rewards funded 100% by digital partners","No hardware at Level 1 onboarding","Rakuten partnership brings distribution, not paid acquisition","JNTO and tourism boards subsidize regional growth"];
 var SCALEUP=[{m:"South Korea",y:"2027",why:"High SME density, 34M tourists",local:"K-pop and webtoon rewards"},{m:"Taiwan",y:"2028",why:"Stamp culture, night-market SMEs",local:"Night-market digital rally"},{m:"Indonesia",y:"2028",why:"64M MSMEs, booming cashless",local:"Halal F&B mode, QRIS"},{m:"Thailand",y:"2029",why:"40M+ tourists, street-food economy",local:"Tourism-first rollout"}];
 
-var state={tab:"home",category:"all",feed:"nearby",showAll:false,saved:{},persona:"student",
-  payOpen:false,payStep:0,payMode:"mottainai",qrSeconds:300,tokenBalance:340,stamps:2,
+var TIERS=[
+  {id:"level1",t:"Level 1 — QR",d:"10-minute setup. No hardware needed."},
+  {id:"level2",t:"Level 2 — POS",d:"Auto inventory + AI prediction. AirRegi & Square JP."},
+  {id:"level3",t:"Level 3 — API",d:"White-label integration for enterprise chains & hotels."}
+];
+var CATEGORIES=["Café","Restaurant","Bakery","Hotel"];
+
+var ICONS={
+  home:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>',
+  modes:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>',
+  wallet:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.4"/><path d="M2.5 10h19"/></svg>',
+  company:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V5.5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  dashboard:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>',
+  campaigns:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>',
+  pay:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg>',
+  plus:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+  back:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  swap:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 6h18M7 22l-4-4 4-4M21 18H3"/></svg>',
+  check:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+};
+
+/* ---------------- state ---------------- */
+var state={
+  role:"customer",
+  tab:"home",
+  category:"all", feed:"nearby", showAll:false, saved:{}, persona:"student",
+  detailId:null,
+  flow:null, flowStep:0, flowMode:"mottainai", flowAmount:"700", flowPersona:"student",
+  qrSeconds:300,
+  tokenBalance:340, stamps:2,
   history:[{title:"Manga, 5 chapters",merchant:"Tsutaya Books",pts:80,when:"2 days ago"},{title:"Music trial, 14 days",merchant:"Blue Note Café",pts:60,when:"last week"}],
-  bizSection:"overview"};
-var timer=null, scanT1=null, scanT2=null;
+  bizSection:"overview",
+  merchantLive:false, onboardStep:0, onboardCategory:"Café", onboardTier:"level1",
+  onboardModes:{mottainai:true,omotenashi:true,stamp:false},
+  campaigns:{mottainai:true,omotenashi:false,stamp:true},
+  merchantStats:{covers:12,surplus:5,profiles:34,repeat:31,revenue:8400},
+  merchantSales:[{amount:"620",customer:"Rie",mode:"stamp",pts:120,when:"25 min ago"},{amount:"850",customer:"Marco",mode:"omotenashi",pts:200,when:"1 hr ago"}]
+};
+var timer=null, scanT1=null, scanT2=null, toastT=null;
 
 function fmtTime(s){var m=Math.floor(s/60),r=s%60;return m+":"+(r<10?"0":"")+r;}
 function buildQR(seed){
@@ -386,59 +547,161 @@ function buildQR(seed){
   function rnd(){h^=h<<13;h>>>=0;h^=h>>17;h^=h<<5;h>>>=0;return h/4294967296;}
   var out=[];for(var k=0;k<n;k++){out.push(rnd()>0.55);}return out;
 }
-var QR_CELLS=buildQR("kakehashi-pay-aoi-2026");
+var QR_CELLS=buildQR("kakehashi-pay-2026");
 
+function toast(msg){
+  var t=$("#toast");t.textContent=msg;t.classList.add("show");
+  clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show");},2200);
+}
+
+/* ---------------- nav config ---------------- */
+function customerTabs(){return [{id:"home",label:"Home",icon:"home"},{id:"modes",label:"Modes",icon:"modes"},{id:"wallet",label:"Wallet",icon:"wallet"},{id:"company",label:"Company",icon:"company"}];}
+function merchantTabs(){return [{id:"dashboard",label:"Dashboard",icon:"dashboard"},{id:"campaigns",label:"Campaigns",icon:"campaigns"},{id:"company",label:"Company",icon:"company"}];}
+function currentTabs(){return state.role==="customer"?customerTabs():merchantTabs();}
+
+/* ---------------- actions ---------------- */
+function switchRole(){
+  state.role = state.role==="customer" ? "merchant" : "customer";
+  state.tab = state.role==="customer" ? "home" : "dashboard";
+  render();
+}
 function setTab(t){state.tab=t;render();}
 function setCategory(c){state.category=c;state.showAll=false;render();}
 function setFeed(f){state.feed=f;render();}
 function toggleSaved(id){state.saved[id]=!state.saved[id];render();}
-function cyclePersona(){var i=PERSONA_ORDER.indexOf(state.persona);state.persona=PERSONA_ORDER[(i+1)%3];render();}
+function openDetail(id){state.detailId=id;render();}
+function closeDetail(){state.detailId=null;render();}
+function addDetailToWallet(){
+  var item=CATALOG.filter(function(c){return c.id===state.detailId;})[0];
+  if(!item)return;
+  state.tokenBalance+=item.pts;
+  state.history.unshift({title:item.title,merchant:item.merchant,pts:item.pts,when:"just now"});
+  state.detailId=null;render();toast("Added to wallet");
+}
+function cyclePersona(field){
+  var i=PERSONA_ORDER.indexOf(state[field]);
+  state[field]=PERSONA_ORDER[(i+1)%3];render();
+}
 
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
 function startTimer(){
   stopTimer();
   timer=setInterval(function(){
     state.qrSeconds--;
-    if(state.qrSeconds<=0){stopTimer();state.payOpen=false;state.payStep=0;state.qrSeconds=300;render();return;}
+    if(state.qrSeconds<=0){stopTimer();closeFlow();toast("Code expired — try again");return;}
     var el=$("#qrTime");if(el)el.textContent="Refreshes in "+fmtTime(state.qrSeconds);
   },1000);
 }
-function openPay(mode){
-  var m=mode||(state.category==="all"||state.category==="rakuten"?"mottainai":state.category);
-  state.payOpen=true;state.payStep=0;state.payMode=m;state.qrSeconds=300;
-  render();startTimer();
+function openFlow(kind,mode){
+  state.flow=kind;
+  state.flowStep = kind==="sale" ? -1 : 0;
+  state.flowMode = mode || (state.category!=="all"&&state.category!=="rakuten"?state.category:"mottainai");
+  state.flowAmount="700";
+  state.flowPersona="student";
+  render();
+  if(kind==="pay"){state.qrSeconds=300;startTimer();}
 }
-function closePay(){
+function closeFlow(){
   stopTimer();if(scanT1)clearTimeout(scanT1);if(scanT2)clearTimeout(scanT2);
-  state.payOpen=false;state.payStep=0;render();
+  state.flow=null;state.flowStep=0;render();
 }
+function saleKey(k){
+  if(k==="C")state.flowAmount="0";
+  else if(k==="back")state.flowAmount=state.flowAmount.slice(0,-1)||"0";
+  else state.flowAmount=(state.flowAmount==="0"?"":state.flowAmount)+k;
+  render();
+}
+function saleGenerate(){state.flowStep=0;state.qrSeconds=300;render();startTimer();}
 function simScan(){
-  stopTimer();state.payStep=1;render();
-  scanT1=setTimeout(function(){state.payStep=2;render();
-    scanT2=setTimeout(function(){state.payStep=3;render();},1300);
+  stopTimer();state.flowStep=1;render();
+  scanT1=setTimeout(function(){state.flowStep=2;render();
+    scanT2=setTimeout(function(){state.flowStep=3;render();},1300);
   },1100);
 }
-function redeemReward(){
-  var r=REWARDS[state.payMode][state.persona];
-  state.tokenBalance+=r.pts;
-  if(state.payMode==="stamp"&&state.stamps<5)state.stamps++;
-  state.history.unshift({title:r.title,merchant:MODE_LABEL[state.payMode],pts:r.pts,when:"just now"});
-  state.payOpen=false;state.payStep=0;render();
+function completeFlow(){
+  var persona = state.flow==="sale" ? state.flowPersona : state.persona;
+  var r=REWARDS[state.flowMode][persona];
+  if(state.flow==="pay"){
+    state.tokenBalance+=r.pts;
+    if(state.flowMode==="stamp"&&state.stamps<5)state.stamps++;
+    state.history.unshift({title:r.title,merchant:MODE_LABEL[state.flowMode],pts:r.pts,when:"just now"});
+    toast("Reward added to wallet");
+  } else {
+    state.merchantStats.covers++;
+    state.merchantStats.revenue+=parseInt(state.flowAmount||"0",10);
+    if(state.flowMode==="mottainai")state.merchantStats.surplus++;
+    state.merchantStats.profiles++;
+    state.merchantSales.unshift({amount:state.flowAmount,customer:PERSONAS[persona].name,mode:state.flowMode,pts:r.pts,when:"just now"});
+    toast("Sale complete");
+  }
+  state.flow=null;state.flowStep=0;render();
 }
+
+function obNext(){state.onboardStep=Math.min(3,state.onboardStep+1);render();}
+function obBack(){state.onboardStep=Math.max(0,state.onboardStep-1);render();}
+function obSetCat(c){state.onboardCategory=c;render();}
+function obSetTier(t){state.onboardTier=t;render();}
+function obToggleMode(m){state.onboardModes[m]=!state.onboardModes[m];render();}
+function goLive(){
+  state.merchantLive=true;state.onboardStep=0;
+  state.campaigns=Object.assign({},state.onboardModes);
+  state.tab="dashboard";render();toast("Kurumi Coffee is live");
+}
+function toggleCampaign(m){state.campaigns[m]=!state.campaigns[m];render();}
 function setBiz(id){state.bizSection=id;render();}
 
+/* ---------------- render: nav ---------------- */
+function renderNav(){
+  var tabs=currentTabs();
+  var side='<div class="brand"><span class="mark">K</span><span class="name">Kakehashi</span></div>'+
+    '<div class="rolepill"><button data-role="customer" class="'+(state.role==="customer"?"on":"")+'">Customer</button>'+
+    '<button data-role="merchant" class="'+(state.role==="merchant"?"on":"")+'">Merchant</button></div>'+
+    '<div class="navlist">'+tabs.map(function(t){
+      return '<button class="navitem'+(state.tab===t.id?" on":"")+'" data-tab="'+t.id+'">'+ICONS[t.icon]+t.label+'</button>';
+    }).join("")+
+    '<button class="navitem'+(state.tab==="profile"?" on":"")+'" data-tab="profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Profile</button>'+
+    '</div>'+
+    (state.role==="customer"
+      ? '<button class="navcta" id="sideCta">'+ICONS.pay+'Simulate a payment</button>'
+      : '<button class="navcta" id="sideCta" '+(state.merchantLive?"":"disabled")+'>'+ICONS.plus+'New sale</button>')+
+    '<div style="flex:1"></div>'+
+    '<button class="navprofile" data-tab="profile"><img src="photos/avatar-aoi.jpg" alt=""><div><div style="font-size:12px;font-weight:700;">'+(state.role==="customer"?"Aoi Tanaka":"Kurumi Coffee")+'</div><div style="font-size:10.5px;color:var(--muted);">'+(state.role==="customer"?"Consumer account":"Merchant account")+'</div></div></button>';
+  $("#sidenav").innerHTML=side;
+
+  var bn=tabs.slice(0,2).map(function(t){
+    return '<button class="bnitem'+(state.tab===t.id?" on":"")+'" data-tab="'+t.id+'">'+ICONS[t.icon]+t.label+'</button>';
+  }).join("");
+  var fab = state.role==="customer"
+    ? '<button class="bnfab" id="bnPay">'+ICONS.pay+'</button>'
+    : '<button class="bnfab" id="bnPay" '+(state.merchantLive?"":"disabled")+'>'+ICONS.plus+'</button>';
+  var bn2=tabs.slice(2).map(function(t){
+    return '<button class="bnitem'+(state.tab===t.id?" on":"")+'" data-tab="'+t.id+'">'+ICONS[t.icon]+t.label+'</button>';
+  }).join("");
+  $("#bottomnav").innerHTML=bn+fab+bn2;
+
+  var topName = state.role==="customer" ? "Aoi Tanaka" : "Kurumi Coffee";
+  var topGreet = state.role==="customer" ? "Good afternoon" : "Merchant dashboard";
+  $("#topbar").innerHTML=
+    '<button class="who" data-tab="profile"><img src="photos/avatar-aoi.jpg" alt=""><div><div class="g">'+topGreet+'</div><div class="n">'+topName+'</div></div></button>'+
+    '<div class="searchwrap"><div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>Search cafés, rewards&hellip;</span></div>'+
+    '<button class="roleswitch" id="roleSwitchBtn">'+ICONS.swap+'<span class="rsLabel">'+(state.role==="customer"?"Merchant view":"Customer view")+'</span></button>'+
+    '<button class="topbtn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button></div>';
+}
+
+/* ---------------- render: cards ---------------- */
 function heart(id){
   var on=!!state.saved[id];
-  return '<button class="heart" data-save="'+id+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="'+(on?"var(--stp)":"none")+'" stroke="'+(on?"var(--stp)":"#B9B6AC")+'" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.2 4.5 5.8 4.1c2-.2 3.7.8 4.9 2.6.5.8 1 .8 1.5 0C13.5 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 3.9 3.8 7.6C19.5 16.4 12 21 12 21z"/></svg></button>';
+  return '<button class="heart" data-save="'+id+'" title="Save"><svg width="15" height="15" viewBox="0 0 24 24" fill="'+(on?"var(--stp)":"none")+'" stroke="'+(on?"var(--stp)":"#B9B6AC")+'" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.2 4.5 5.8 4.1c2-.2 3.7.8 4.9 2.6.5.8 1 .8 1.5 0C13.5 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 3.9 3.8 7.6C19.5 16.4 12 21 12 21z"/></svg></button>';
 }
 function rewardCard(r){
   var c=CAT[r.cat];
-  return '<div class="rcard"><div class="ph"><img src="'+r.img+'" alt=""><div class="tint" style="background:'+c.fg+'"></div>'+
+  return '<div class="rcard" data-detail="'+r.id+'"><div class="ph"><img src="'+r.img+'" alt=""><div class="tint" style="background:'+c.fg+'"></div>'+
     '<span class="tag" style="color:'+c.fg+'">'+c.label+'</span>'+heart(r.id)+'</div>'+
     '<div class="body"><div class="ti">'+esc(r.title)+'</div><div class="me">'+esc(r.merchant)+' &middot; '+r.dist+'</div>'+
     '<div class="pt">+'+r.pts+'</div></div></div>';
 }
 
+/* ---------------- render: customer tabs ---------------- */
 function renderHome(){
   var catalog=CATALOG.filter(function(r){return state.category==="all"||r.cat===state.category;});
   catalog.sort(function(a,b){return state.feed==="nearby"?a.distVal-b.distVal:b.pts-a.pts;});
@@ -448,11 +711,11 @@ function renderHome(){
     return '<button class="pill'+(on?" on "+cls:"")+'" data-cat="'+key+'">'+label+'</button>';
   }
   return ''+
-  '<div class="h1">Featured rewards</div><div class="sub">4 rewards waiting nearby in Nakameguro.</div>'+
+  '<div class="h1">Featured rewards</div><div class="sub">'+catalog.length+' rewards waiting nearby in Nakameguro.</div>'+
   '<div class="homehero">'+
-    '<div class="promo"><img src="photos/banner-cafe.jpg" alt=""><div class="scrim"></div>'+
+    '<button class="promo" data-tab="dashboardPromo"><img src="photos/banner-cafe.jpg" alt=""><div class="scrim"></div>'+
       '<div class="txt"><div class="kick">For merchants</div><div class="head">List your café free. No hardware needed.</div>'+
-      '<button data-go="business">Become a merchant</button></div></div>'+
+      '<span class="cta">Become a merchant</span></div></button>'+
     '<div class="minicard"><div class="k">Kakehashi Token</div><div class="v">'+state.tokenBalance+'</div><div class="d">'+state.stamps+' of 5 stamps collected</div></div>'+
   '</div>'+
   '<div class="pills">'+
@@ -473,32 +736,68 @@ function renderModes(){
   }
   return '<div class="h1">Reward modes</div><div class="sub">One AI engine, tuned to a different merchant goal each time.</div>'+
   '<div class="modes-grid">'+
-  card("mot","var(--mot)","var(--mot-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>',"Mottainai Mode","Spots surplus stock before close and offers a reward that sells it at full price. No markdowns, no brand damage.","mottainai")+
-  card("omo","var(--omo)","var(--omo-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>',"Omotenashi Mode","Recognizes an inbound tourist and routes their spending to independent local shops nearby, funded by tourism boards.","omotenashi")+
-  card("stp","var(--stp)","var(--stp-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>',"Digital Stamp Rally","A modern take on eki-stamp culture. Collect across merchants to unlock escalating experiences.","stamp")+
+  card("mot","var(--mot)","var(--mot-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>',"Mottainai Mode",MODE_DESC.mottainai,"mottainai")+
+  card("omo","var(--omo)","var(--omo-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>',"Omotenashi Mode",MODE_DESC.omotenashi,"omotenashi")+
+  card("stp","var(--stp)","var(--stp-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>',"Digital Stamp Rally",MODE_DESC.stamp,"stamp")+
   '</div>'+
   '<div class="rakbanner"><span class="badge">R</span><div><div class="tt">Every reward also earns Rakuten Points</div><div class="dd">A Kakehashi &times; Rakuten partnership benefit, layered on top of the reward above.</div></div>'+
-  '<button data-go="business" data-biz="partnership">How it works</button></div>';
+  '<button data-go="company" data-biz="partnership">How it works</button></div>';
 }
 
 function renderWallet(){
   var stamps="";
   for(var i=0;i<5;i++){var f=i<state.stamps;stamps+='<div class="stamp'+(f?" filled":"")+'">'+(f?"&#9679;":(i+1))+'</div>';}
-  var hist=state.history.map(function(h){
+  var histHtml = state.history.length ? state.history.map(function(h){
     return '<div class="hrow"><div class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-4-6-2.5S5 8 12 7ZM12 7c1.5-3 4.5-4 6-2.5S19 8 12 7Z"/></svg></div>'+
     '<div class="m"><div class="t">'+esc(h.title)+'</div><div class="s">'+esc(h.merchant)+' &middot; '+h.when+'</div></div><div class="p">+'+h.pts+'</div></div>';
-  }).join("");
+  }).join("") : '<div class="empty">No unlocks yet — pay at a Kakehashi merchant to start earning.</div>';
   return '<div class="h1">Wallet</div>'+
   '<div class="wallet-top">'+
     '<div class="tokencard"><div class="k">Kakehashi Token</div><div class="v">'+state.tokenBalance+'</div>'+
-    '<button data-pay><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/></svg>Show pay code</button></div>'+
+    '<button data-pay>'+ICONS.pay.replace('#fff','currentColor')+'Show pay code</button></div>'+
     '<div class="stampcard"><div style="font-size:13px;font-weight:800;">Café rally &middot; Nakameguro</div><div class="stamps">'+stamps+'</div></div>'+
   '</div>'+
   '<div class="sectionhead"><div class="t">Recent unlocks</div></div>'+
-  '<div class="hist">'+hist+'</div>';
+  '<div class="hist">'+histHtml+'</div>';
 }
 
-function renderBusiness(){
+function renderProfileCustomer(){
+  var savedItems=CATALOG.filter(function(c){return state.saved[c.id];});
+  var savedHtml = savedItems.length ? '<div class="savedgrid">'+savedItems.map(function(r){
+    return '<button class="savedmini" data-detail="'+r.id+'"><img src="'+r.img+'" alt=""><div class="b"><div class="t">'+esc(r.title)+'</div></div></button>';
+  }).join("")+'</div>' : '<div class="empty">Tap the heart on a reward to save it here.</div>';
+  return '<div class="h1">Profile</div>'+
+  '<div class="profhead" style="margin-top:16px;"><img src="photos/avatar-aoi.jpg" alt=""><div><div class="n">Aoi Tanaka</div><div class="s">Member since Jan 2026 &middot; '+state.tokenBalance+' tokens</div></div></div>'+
+  '<div class="profgrid" style="margin-top:16px;">'+
+    '<div><div class="sectionhead" style="margin-top:0;"><div class="t" style="font-size:13px;">Saved rewards</div></div>'+savedHtml+'</div>'+
+    '<div><div class="sectionhead" style="margin-top:0;"><div class="t" style="font-size:13px;">Settings</div></div>'+
+    '<div class="settingslist" style="margin-top:12px;">'+
+    ['Notifications','Payment methods','Language','Help & support'].map(function(s){
+      return '<div class="settingsrow">'+s+'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>';
+    }).join("")+'</div></div>'+
+  '</div>'+
+  '<button class="signout" id="roleSwitchInline" style="color:var(--accent);border-color:var(--accent);margin-top:18px;max-width:1100px;">Switch to merchant view</button>'+
+  '<button class="signout" style="max-width:1100px;">Sign out</button>';
+}
+function renderProfileMerchant(){
+  return '<div class="h1">Profile</div>'+
+  '<div class="profhead" style="margin-top:16px;"><img src="photos/merchant-storefront.jpg" alt=""><div><div class="n">Kurumi Coffee</div><div class="s">'+state.onboardCategory+' &middot; Nakameguro &middot; '+(state.merchantLive?"Live":"Not live yet")+'</div></div></div>'+
+  '<div class="profgrid" style="margin-top:16px;">'+
+    '<div><div class="sectionhead" style="margin-top:0;"><div class="t" style="font-size:13px;">Billing</div></div>'+
+    '<div class="planrow"><div><div class="t">SME SaaS plan</div><div class="p">¥3,500 /mo</div></div><button>Manage</button></div>'+
+    '<div class="planrow"><div><div class="t">Payout account</div><div class="p" style="font-size:13px;">&middot;&middot;&middot;&middot; 4821</div></div><button>Change</button></div></div>'+
+    '<div><div class="sectionhead" style="margin-top:0;"><div class="t" style="font-size:13px;">Settings</div></div>'+
+    '<div class="settingslist" style="margin-top:12px;">'+
+    ['Store details','Team access','Notifications','Help & support'].map(function(s){
+      return '<div class="settingsrow">'+s+'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>';
+    }).join("")+'</div></div>'+
+  '</div>'+
+  '<button class="signout" id="roleSwitchInline" style="color:var(--accent);border-color:var(--accent);margin-top:18px;max-width:1100px;">Switch to customer view</button>'+
+  '<button class="signout" style="max-width:1100px;">Sign out</button>';
+}
+
+/* ---------------- render: company (shared) ---------------- */
+function renderCompany(){
   var chips=BIZ_LIST.map(function(b){return '<button class="bizchip'+(state.bizSection===b.id?" on":"")+'" data-biz="'+b.id+'">'+b.label+'</button>';}).join("");
   var body="";
   if(state.bizSection==="overview"){
@@ -532,76 +831,212 @@ function renderBusiness(){
     '<div class="scale-grid">'+SCALEUP.map(function(s){return '<div class="scard"><div class="top"><div class="m">'+s.m+'</div><div class="y">'+s.y+'</div></div><div class="w">'+s.why+'</div><div class="l">&rarr; '+s.local+'</div></div>';}).join("")+'</div>'+
     '<div class="closing"><div class="q">&ldquo;We don\'t compete with Rakuten. We complete it.<br>We don\'t replace loyalty. We reinvent it.&rdquo;</div></div>';
   }
-  return '<div class="h1">Business</div><div class="sub">For merchants, partners &amp; investors.</div><div class="bizchips">'+chips+'</div><div style="margin-top:18px;">'+body+'</div>';
+  return '<div class="h1">Company</div><div class="sub">For merchants, partners &amp; investors.</div><div class="bizchips">'+chips+'</div><div style="margin-top:18px;">'+body+'</div>';
 }
 
-function renderPay(){
-  var ov=$("#payOverlay");
-  if(!state.payOpen){ov.hidden=true;ov.innerHTML="";return;}
-  ov.hidden=false;
-  var persona=PERSONAS[state.persona];
-  var reward=REWARDS[state.payMode][state.persona];
-  var title=state.payStep<3?"Pay & earn":"Reward unlocked";
+/* ---------------- render: merchant onboarding ---------------- */
+function renderOnboarding(){
+  var dots="";for(var i=0;i<4;i++)dots+='<div class="'+(i<=state.onboardStep?"on":"")+'"></div>';
   var body="";
-  if(state.payStep===0){
+  if(state.onboardStep===0){
+    body='<div class="obcard"><div class="lbl">Business name</div><div class="obfield">Kurumi Coffee</div>'+
+    '<div class="lbl">Category</div><div class="obcatgrid">'+CATEGORIES.map(function(c){
+      return '<div class="obcat'+(state.onboardCategory===c?" on":"")+'" data-obcat="'+c+'">'+c+'</div>';
+    }).join("")+'</div>'+
+    '<div class="lbl" style="margin-top:14px;">Address</div><div class="obfield">2-14 Nakameguro, Meguro City, Tokyo</div></div>';
+  } else if(state.onboardStep===1){
+    body='<div class="obcard"><div class="lbl">Integration tier</div>'+TIERS.map(function(t){
+      return '<div class="obtier'+(state.onboardTier===t.id?" on":"")+'" data-obtier="'+t.id+'"><div class="t">'+t.t+'</div><div class="d">'+t.d+'</div></div>';
+    }).join("")+'</div>';
+  } else if(state.onboardStep===2){
+    body='<div class="obcard"><div class="lbl">Reward modes to enable</div>'+
+    ['mottainai','omotenashi','stamp'].map(function(m){
+      var on=state.onboardModes[m];
+      return '<div class="obmode"><span class="t">'+MODE_LABEL[m].replace(" reward"," Mode")+'</span><button class="toggle'+(on?" on":"")+'" data-obmode="'+m+'"><span class="dot"></span></button></div>';
+    }).join("")+'</div>';
+  } else {
+    body='<div class="obcard oblive"><img src="photos/onboarding.jpg" alt="">'+
+    '<div class="check">'+ICONS.check+'</div>'+
+    '<div class="t">Kurumi Coffee is ready to go live</div>'+
+    '<div class="d">'+state.onboardCategory+' &middot; '+TIERS.filter(function(t){return t.id===state.onboardTier;})[0].t+' &middot; '+
+    Object.keys(state.onboardModes).filter(function(m){return state.onboardModes[m];}).length+' modes enabled</div>'+
+    '<button class="obnav obnext" id="goLiveBtn" style="width:100%;margin-top:18px;">Go to dashboard</button></div>';
+  }
+  var nav = state.onboardStep<3
+    ? '<div class="obnav">'+(state.onboardStep>0?'<button class="obback" data-obback>Back</button>':'')+'<button class="obnext" data-obnext>Continue</button></div>'
+    : '';
+  return '<div class="obwrap"><div class="h1">Set up Kurumi Coffee</div><div class="sub">Free to start. No hardware needed.</div>'+
+  '<div class="obprogress">'+dots+'</div>'+body+nav+'</div>';
+}
+
+/* ---------------- render: merchant dashboard / campaigns ---------------- */
+function renderDashboard(){
+  if(!state.merchantLive)return renderOnboarding();
+  var st=state.merchantStats;
+  var salesHtml = state.merchantSales.length ? state.merchantSales.map(function(s){
+    var c=CAT[s.mode];
+    return '<div class="hrow"><div class="ic" style="background:'+c.bg+';color:'+c.fg+';"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg></div>'+
+    '<div class="m"><div class="t">¥'+s.amount+' &middot; '+s.customer+'</div><div class="s">'+c.label+' &middot; '+s.when+'</div></div><div class="p">+'+s.pts+' pts given</div></div>';
+  }).join("") : '<div class="empty">No sales yet — tap New Sale to simulate one.</div>';
+  return '<div class="dashhero"><img src="photos/merchant-storefront.jpg" alt=""><div class="scrim"></div>'+
+  '<div class="tx"><div class="live"><span class="d"></span>Live on Kakehashi</div><div class="nm">Kurumi Coffee</div><div class="ad">Nakameguro, Tokyo &middot; Level 1 · QR</div></div></div>'+
+  '<button class="dashcta" id="dashSaleBtn">'+ICONS.plus+'New sale</button>'+
+  '<div class="stat4">'+
+    '<div class="stattile"><div class="v">'+st.covers+'</div><div class="l">Dead-zone covers today</div></div>'+
+    '<div class="stattile"><div class="v">'+st.surplus+'</div><div class="l">Surplus units rescued</div></div>'+
+    '<div class="stattile"><div class="v">'+st.profiles+'</div><div class="l">New customer profiles</div></div>'+
+    '<div class="stattile"><div class="v">'+Math.min(58,st.repeat)+'%</div><div class="l">Repeat-visit rate</div></div>'+
+  '</div>'+
+  '<div class="darkcard"><div class="t">Mottainai alert</div><div class="d">6 croissants + 3 bento projected unsold by 20:00. Campaign is armed — the next matching sale triggers it.</div></div>'+
+  '<div class="sectionhead"><div class="t">Recent sales</div></div>'+
+  '<div class="hist">'+salesHtml+'</div>';
+}
+function renderCampaigns(){
+  function card(m,color,bg,icon,title,desc){
+    var on=state.campaigns[m];
+    return '<div class="campcard"><div class="top"><div class="modeicon" style="background:'+bg+';color:'+color+'">'+icon+'</div>'+
+      '<button class="toggle'+(on?" on":"")+'" data-campaign="'+m+'"><span class="dot"></span></button></div>'+
+      '<div class="mt">'+title+'</div><div class="md">'+desc+'</div>'+
+      '<div class="state" style="color:'+(on?"var(--mot)":"var(--muted)")+'">'+(on?"Active":"Paused")+'</div></div>';
+  }
+  return '<div class="h1">Campaigns</div><div class="sub">Turn Kakehashi\'s AI modes on or off for Kurumi Coffee.</div>'+
+  '<div class="campgrid">'+
+  card("mottainai","var(--mot)","var(--mot-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>',"Mottainai Mode",MODE_DESC.mottainai)+
+  card("omotenashi","var(--omo)","var(--omo-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>',"Omotenashi Mode",MODE_DESC.omotenashi)+
+  card("stamp","var(--stp)","var(--stp-bg)",'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>',"Digital Stamp Rally",MODE_DESC.stamp)+
+  '</div>';
+}
+
+/* ---------------- render: modals ---------------- */
+function renderDetailModal(){
+  if(!state.detailId)return "";
+  var r=CATALOG.filter(function(c){return c.id===state.detailId;})[0];
+  if(!r)return "";
+  var c=CAT[r.cat];
+  return '<div class="modal-overlay" id="detailOverlay"><div class="modal-card">'+
+  '<div class="modal-head"><div class="t">Reward details</div><button class="xbtn" data-closedetail><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>'+
+  '<div class="modal-body"><div class="detail-hero"><img src="'+r.img+'" alt=""><span class="tag" style="color:'+c.fg+'">'+c.label+'</span></div>'+
+  '<div style="width:100%;text-align:left;margin-top:14px;"><div style="font-size:16px;font-weight:800;">'+esc(r.title)+'</div><div style="font-size:12px;color:var(--muted);margin-top:4px;">'+esc(r.merchant)+' &middot; '+r.dist+'</div></div>'+
+  '<div class="detail-pts" style="align-self:flex-start;">+'+r.pts+' <span style="font-size:13px;color:var(--muted);font-weight:600;">tokens</span></div>'+
+  '<div class="detail-desc">'+r.detail+'</div>'+
+  '<div class="detail-meta"><span>'+r.expiry+'</span><span>Redeems in-app</span></div>'+
+  '<button class="redeembtn" data-adddetail>Add to wallet</button></div></div></div>';
+}
+function renderFlowModal(){
+  if(!state.flow)return "";
+  var isSale=state.flow==="sale";
+  var persona = isSale ? state.flowPersona : state.persona;
+  var p=PERSONAS[persona];
+  var reward=REWARDS[state.flowMode][persona];
+  var title = state.flowStep>=3 ? (isSale?"Sale complete":"Reward unlocked") : (isSale?"New sale":"Pay & earn");
+  var body="";
+
+  if(isSale && state.flowStep===-1){
+    var modePills=["mottainai","omotenashi","stamp"].map(function(m){
+      var c=CAT[m];
+      return '<button class="pill'+(state.flowMode===m?" on":"")+'" data-flowmode="'+m+'" style="'+(state.flowMode===m?"background:"+c.fg+";border-color:"+c.fg+";":"")+'">'+c.label+'</button>';
+    }).join("");
+    body='<div class="amountbox"><span>¥</span><div class="val">'+state.flowAmount+'</div></div>'+
+    '<div class="keypad">'+[1,2,3,4,5,6,7,8,9,"C",0,"back"].map(function(k){
+      return '<button data-saleKey="'+k+'">'+(k==="back"?"&larr;":k)+'</button>';
+    }).join("")+'</div>'+
+    '<div class="pills" style="justify-content:center;margin-top:14px;">'+modePills+'</div>'+
+    '<button class="scanbtn" data-generate>Generate QR for customer</button>';
+  } else if(state.flowStep===0){
     var qr=QR_CELLS.map(function(v){return '<div style="background:'+(v?"var(--ink)":"#fff")+'"></div>';}).join("");
     body='<div class="qrbox"><div class="qrgrid">'+qr+'</div></div>'+
-    '<div class="qrtime" id="qrTime">Refreshes in '+fmtTime(state.qrSeconds)+'</div>'+
-    '<button class="personabtn" data-cycle><span style="font-size:12px;color:var(--muted);">Paying as</span><span style="font-size:12.5px;font-weight:700;">'+persona.name+'</span>'+
-    '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg></button>'+
-    '<button class="scanbtn" data-scan>Simulate merchant scan</button>';
-  } else if(state.payStep===1){
+    '<div class="qrtime" id="qrTime">Refreshes in '+fmtTime(state.qrSeconds)+'</div>';
+    if(isSale){
+      body+='<div class="personarow">'+PERSONA_ORDER.map(function(k){
+        return '<button class="'+(state.flowPersona===k?"on":"")+'" data-flowpersona="'+k+'">'+PERSONAS[k].name+'</button>';
+      }).join("")+'</div>';
+    } else {
+      body+='<button class="personabtn" data-cyclepersona><span style="font-size:12px;color:var(--muted);">Paying as</span><span style="font-size:12.5px;font-weight:700;">'+p.name+'</span>'+
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg></button>';
+    }
+    body+='<button class="scanbtn" data-scan>Simulate '+(isSale?"customer":"merchant")+' scan</button>';
+  } else if(state.flowStep===1){
     body='<div class="scanframe"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span><div class="scanline"></div></div>'+
     '<div style="font-size:13px;font-weight:700;margin-top:18px;">Reading payment&hellip;</div>';
-  } else if(state.payStep===2){
+  } else if(state.flowStep===2){
     body='<div class="matchicon"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>'+
-    '<div style="font-size:14px;font-weight:800;margin-top:16px;">Matching your reward</div>'+
+    '<div style="font-size:14px;font-weight:800;margin-top:16px;">Matching '+(isSale?"a reward for "+p.name:"your reward")+'</div>'+
     '<div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;width:100%;">'+
-    '<div class="matchrow"><span style="color:var(--muted);">Preference</span><span style="font-weight:700;">'+persona.affinity+'</span></div>'+
-    '<div class="matchrow"><span style="color:var(--muted);">Merchant goal</span><span style="font-weight:700;">'+MODE_GOAL[state.payMode]+'</span></div>'+
-    '<div class="matchrow"><span style="color:var(--muted);">Conversion odds</span><span style="font-weight:700;">'+(state.persona==="tourist"?"58%":"66%")+'</span></div></div>';
+    '<div class="matchrow"><span style="color:var(--muted);">Preference</span><span style="font-weight:700;">'+p.affinity+'</span></div>'+
+    '<div class="matchrow"><span style="color:var(--muted);">Merchant goal</span><span style="font-weight:700;">'+MODE_GOAL[state.flowMode]+'</span></div>'+
+    '<div class="matchrow"><span style="color:var(--muted);">Conversion odds</span><span style="font-weight:700;">'+(persona==="tourist"?"58%":"66%")+'</span></div></div>';
   } else {
-    body='<div class="rewardtop" style="background:'+MODE_ACCENT[state.payMode]+'"><div style="font-size:11px;font-weight:700;opacity:.85;letter-spacing:.05em;text-transform:uppercase;">+'+reward.pts+' Kakehashi Token</div>'+
+    body='<div class="rewardtop" style="background:'+MODE_ACCENT[state.flowMode]+'"><div style="font-size:11px;font-weight:700;opacity:.85;letter-spacing:.05em;text-transform:uppercase;">+'+reward.pts+' Kakehashi Token</div>'+
     '<div style="font-size:18px;font-weight:800;margin-top:6px;line-height:1.3;">'+reward.title+'</div><div style="font-size:12px;opacity:.85;margin-top:4px;">'+reward.sub+'</div></div>'+
-    '<div class="rewardbody">'+reward.why+'</div>'+
+    '<div class="rewardbody">'+(isSale?p.name+" pays ¥"+state.flowAmount+". "+reward.why:reward.why)+'</div>'+
     '<div class="rakline"><span style="width:20px;height:20px;border-radius:50%;background:var(--rak-bg);color:var(--rak);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;">R</span>+500 Rakuten Points included</div>'+
-    '<button class="redeembtn" data-redeem>Add to wallet</button>';
+    '<button class="redeembtn" data-complete>'+(isSale?"Done":"Add to wallet")+'</button>';
   }
-  ov.innerHTML='<div class="pay-card"><div class="pay-head"><div class="t">'+title+'</div>'+
-    '<button class="xbtn" data-closepay><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>'+
-    '<div class="pay-body">'+body+'</div></div>';
+  return '<div class="modal-overlay" id="flowOverlay"><div class="modal-card"><div class="modal-head"><div class="t">'+title+'</div>'+
+    '<button class="xbtn" data-closeflow><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>'+
+    '<div class="modal-body">'+body+'</div></div></div>';
 }
 
+/* ---------------- master render ---------------- */
+function renderContent(){
+  if(state.role==="customer"){
+    if(state.tab==="home")return renderHome();
+    if(state.tab==="modes")return renderModes();
+    if(state.tab==="wallet")return renderWallet();
+    if(state.tab==="company")return renderCompany();
+    if(state.tab==="profile")return renderProfileCustomer();
+  } else {
+    if(state.tab==="dashboard"||state.tab==="dashboardPromo")return renderDashboard();
+    if(state.tab==="campaigns")return renderCampaigns();
+    if(state.tab==="company")return renderCompany();
+    if(state.tab==="profile")return renderProfileMerchant();
+  }
+  return "";
+}
 function render(){
-  $$(".navitem").forEach(function(b){b.classList.toggle("on",b.dataset.tab===state.tab);});
-  $$(".bnitem").forEach(function(b){b.classList.toggle("on",b.dataset.tab===state.tab);});
-  var html="";
-  if(state.tab==="home")html=renderHome();
-  else if(state.tab==="modes")html=renderModes();
-  else if(state.tab==="wallet")html=renderWallet();
-  else if(state.tab==="business")html=renderBusiness();
-  $("#content").innerHTML=html;
-  renderPay();
+  renderNav();
+  $("#content").innerHTML='<div class="kh-in">'+renderContent()+'</div>';
+  $("#modalRoot").innerHTML=renderDetailModal()+renderFlowModal();
 }
 
+/* ---------------- events ---------------- */
 document.addEventListener("click",function(e){
   var t;
-  if((t=e.target.closest("[data-tab]"))){setTab(t.dataset.tab);return;}
+  if((t=e.target.closest("[data-role]"))){ if(t.dataset.role!==state.role) switchRole(); return; }
+  if((t=e.target.closest("#roleSwitchBtn"))){ switchRole(); return; }
+  if((t=e.target.closest("#roleSwitchInline"))){ switchRole(); return; }
+  if((t=e.target.closest("[data-tab]"))){ var tb=t.dataset.tab; setTab(tb==="dashboardPromo"?"dashboard":tb); if(tb==="dashboardPromo"&&state.role==="customer"){switchRole();} return; }
   if((t=e.target.closest("[data-cat]"))){setCategory(t.dataset.cat);return;}
   if((t=e.target.closest("[data-feed]"))){setFeed(t.dataset.feed);return;}
   if((t=e.target.closest("[data-showall]"))){state.showAll=!state.showAll;render();return;}
-  if((t=e.target.closest("[data-save]"))){toggleSaved(t.dataset.save);return;}
-  if((t=e.target.closest("[data-demo]"))){openPay(t.dataset.demo);return;}
-  if((t=e.target.closest("#bnPay"))){openPay();return;}
-  if((t=e.target.closest("#sideCta"))){openPay();return;}
-  if((t=e.target.closest("[data-pay]"))){openPay();return;}
+  if((t=e.target.closest("[data-save]"))){e.stopPropagation();toggleSaved(t.dataset.save);return;}
+  if((t=e.target.closest("[data-detail]"))){openDetail(t.dataset.detail);return;}
+  if((t=e.target.closest("[data-closedetail]"))){closeDetail();return;}
+  if(e.target.id==="detailOverlay"){closeDetail();return;}
+  if((t=e.target.closest("[data-adddetail]"))){addDetailToWallet();return;}
+  if((t=e.target.closest("[data-demo]"))){openFlow("pay",t.dataset.demo);return;}
+  if((t=e.target.closest("#bnPay"))){ if(!t.disabled) openFlow(state.role==="customer"?"pay":"sale"); return; }
+  if((t=e.target.closest("#sideCta"))){ if(!t.disabled) openFlow(state.role==="customer"?"pay":"sale"); return; }
+  if((t=e.target.closest("#dashSaleBtn"))){openFlow("sale");return;}
+  if((t=e.target.closest("[data-pay]"))){openFlow("pay");return;}
   if((t=e.target.closest("[data-go]"))){setTab(t.dataset.go);if(t.dataset.biz)setBiz(t.dataset.biz);return;}
-  if((t=e.target.closest("[data-biz]"))){setBiz(t.dataset.biz);return;}
-  if((t=e.target.closest("[data-cycle]"))){cyclePersona();return;}
+  if((t=e.target.closest("[data-biz]")) && !e.target.closest("[data-go]")){setBiz(t.dataset.biz);return;}
+  if((t=e.target.closest("[data-cyclepersona]"))){cyclePersona("persona");return;}
+  if((t=e.target.closest("[data-flowpersona]"))){state.flowPersona=t.dataset.flowpersona;render();return;}
+  if((t=e.target.closest("[data-flowmode]"))){state.flowMode=t.dataset.flowmode;render();return;}
+  if((t=e.target.closest("[data-saleKey]"))){saleKey(t.dataset.salekey===undefined?t.getAttribute("data-saleKey"):t.dataset.salekey);return;}
+  if((t=e.target.closest("[data-generate]"))){saleGenerate();return;}
   if((t=e.target.closest("[data-scan]"))){simScan();return;}
-  if((t=e.target.closest("[data-closepay]"))){closePay();return;}
-  if((t=e.target.closest("[data-redeem]"))){redeemReward();return;}
-  if(e.target.id==="payOverlay"){closePay();return;}
+  if((t=e.target.closest("[data-closeflow]"))){closeFlow();return;}
+  if(e.target.id==="flowOverlay"){closeFlow();return;}
+  if((t=e.target.closest("[data-complete]"))){completeFlow();return;}
+  if((t=e.target.closest("[data-obcat]"))){obSetCat(t.dataset.obcat);return;}
+  if((t=e.target.closest("[data-obtier]"))){obSetTier(t.dataset.obtier);return;}
+  if((t=e.target.closest("[data-obmode]"))){obToggleMode(t.dataset.obmode);return;}
+  if((t=e.target.closest("[data-obnext]"))){obNext();return;}
+  if((t=e.target.closest("[data-obback]"))){obBack();return;}
+  if((t=e.target.closest("#goLiveBtn"))){goLive();return;}
+  if((t=e.target.closest("[data-campaign]"))){toggleCampaign(t.dataset.campaign);return;}
 });
 
 render();
