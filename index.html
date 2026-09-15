@@ -652,9 +652,10 @@ function closeDetail(){state.detailId=null;render();}
 function addDetailToWallet(){
   var item=CATALOG.filter(function(c){return c.id===state.detailId;})[0];
   if(!item)return;
-  state.tokenBalance+=item.pts;
-  state.history.unshift({title:item.title,merchant:item.merchant,pts:item.pts,when:"just now"});
-  state.detailId=null;render();toast("Added to wallet");
+  if(state.tokenBalance<item.pts){toast("Not enough tokens — you need "+(item.pts-state.tokenBalance)+" more");return;}
+  state.tokenBalance-=item.pts;
+  state.history.unshift({title:item.title,merchant:item.merchant,pts:item.pts,neg:true,when:"just now"});
+  state.detailId=null;render();toast("Redeemed — enjoy!");
 }
 function cyclePersona(field){
   var i=PERSONA_ORDER.indexOf(state[field]);
@@ -776,7 +777,7 @@ function rewardCard(r){
   return '<div class="rcard" data-detail="'+r.id+'"><div class="ph"><img src="'+r.img+'" alt=""><div class="tint" style="background:'+c.fg+'"></div>'+
     '<span class="tag" style="color:'+c.fg+'">'+c.label+'</span>'+heart(r.id)+'</div>'+
     '<div class="body"><div class="ti">'+esc(r.title)+'</div><div class="me">'+esc(r.merchant)+' &middot; '+r.dist+'</div>'+
-    '<div class="pt">+'+r.pts+'</div></div></div>';
+    '<div class="pt">'+r.pts+' pts</div></div></div>';
 }
 
 /* ---------------- render: customer tabs ---------------- */
@@ -827,7 +828,7 @@ function renderWallet(){
   for(var i=0;i<5;i++){var f=i<state.stamps;stamps+='<div class="stamp'+(f?" filled":"")+'">'+(f?"&#9679;":(i+1))+'</div>';}
   var histHtml = state.history.length ? state.history.map(function(h){
     return '<div class="hrow"><div class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-4-6-2.5S5 8 12 7ZM12 7c1.5-3 4.5-4 6-2.5S19 8 12 7Z"/></svg></div>'+
-    '<div class="m"><div class="t">'+esc(h.title)+'</div><div class="s">'+esc(h.merchant)+' &middot; '+h.when+'</div></div><div class="p">+'+h.pts+'</div></div>';
+    '<div class="m"><div class="t">'+esc(h.title)+'</div><div class="s">'+esc(h.merchant)+' &middot; '+(h.neg?"redeemed &middot; ":"earned &middot; ")+h.when+'</div></div><div class="p'+(h.neg?" neg":"")+'">'+(h.neg?"&minus;":"+")+h.pts+'</div></div>';
   }).join("") : '<div class="empty">No unlocks yet — pay at a Kakehashi merchant to start earning.</div>';
   return '<div class="h1">Wallet</div>'+
   '<div class="wallet-top">'+
@@ -991,14 +992,16 @@ function renderDetailModal(){
   var r=CATALOG.filter(function(c){return c.id===state.detailId;})[0];
   if(!r)return "";
   var c=CAT[r.cat];
+  var enough=state.tokenBalance>=r.pts;
   return '<div class="modal-overlay" id="detailOverlay"><div class="modal-card">'+
   '<div class="modal-head"><div class="t">Reward details</div><button class="xbtn" data-closedetail><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>'+
   '<div class="modal-body"><div class="detail-hero"><img src="'+r.img+'" alt=""><span class="tag" style="color:'+c.fg+'">'+c.label+'</span></div>'+
   '<div style="width:100%;text-align:left;margin-top:14px;"><div style="font-size:18.5px;font-weight:800;">'+esc(r.title)+'</div><div style="font-size:14px;color:var(--muted);margin-top:4px;">'+esc(r.merchant)+' &middot; '+r.dist+'</div></div>'+
-  '<div class="detail-pts" style="align-self:flex-start;">+'+r.pts+' <span style="font-size:15px;color:var(--muted);font-weight:600;">tokens</span></div>'+
+  '<div class="detail-pts" style="align-self:flex-start;">'+r.pts+' <span style="font-size:15px;color:var(--muted);font-weight:600;">tokens to redeem</span></div>'+
+  '<div style="align-self:flex-start;font-size:12.5px;color:var(--muted);margin-top:2px;">Your balance: '+state.tokenBalance+' tokens'+(enough?"":" &middot; need "+(r.pts-state.tokenBalance)+" more")+'</div>'+
   '<div class="detail-desc">'+r.detail+'</div>'+
   '<div class="detail-meta"><span>'+r.expiry+'</span><span>Redeems in-app</span></div>'+
-  '<button class="redeembtn" data-adddetail>Add to wallet</button></div></div></div>';
+  '<button class="redeembtn" data-adddetail style="'+(enough?"":"opacity:.5;")+'">'+(enough?"Redeem for "+r.pts+" tokens":"Not enough tokens")+'</button></div></div></div>';
 }
 function renderFlowModal(){
   if(!state.flow)return "";
