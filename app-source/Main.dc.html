@@ -1,0 +1,844 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  ::-webkit-scrollbar { display: none; }
+  a { color: #2A5CF0; } a:hover { color: #1E46C4; }
+  @keyframes kh-scan { 0%,100% { top: 14px; } 50% { top: 178px; } }
+  @keyframes kh-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes kh-pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+  .kh-scanline { animation: kh-scan 1.8s ease-in-out infinite; }
+  .kh-fade { animation: kh-fade .35s ease both; }
+  .kh-pop { animation: kh-pop .3s cubic-bezier(.2,.9,.3,1.2) both; }
+  @media (prefers-reduced-motion: reduce) { .kh-scanline, .kh-fade, .kh-pop { animation: none !important; } }
+</style>
+</helmet>
+
+<div style="width:390px;height:844px;background:#FAFAF8;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#14181F;position:relative;overflow:hidden;border-radius:0;">
+
+  <!-- ================= SCROLL AREA ================= -->
+  <div style="position:absolute;inset:0;bottom:82px;overflow-y:auto;padding:20px 20px 28px;">
+
+    <!-- ---------- HOME ---------- -->
+    <sc-if value="{{isHome}}" hint-placeholder-val="{{true}}">
+      <div class="kh-fade">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:42px;height:42px;border-radius:13px;overflow:hidden;flex:0 0 auto;">
+            <img src="avatar-aoi.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;color:#8A8F98;font-weight:500;">Good afternoon</div>
+            <div style="font-size:16px;font-weight:700;">Aoi Tanaka</div>
+          </div>
+          <button onClick="{{noop}}" style="width:40px;height:40px;border-radius:12px;border:1px solid #ECEAE4;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex:0 0 auto;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#14181F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            <span style="position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#C0402E;border:1.5px solid #fff;"></span>
+          </button>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <div style="flex:1;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:12px 14px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <span style="font-size:13.5px;color:#8A8F98;">Search cafés, rewards&hellip;</span>
+          </div>
+          <button onClick="{{noop}}" style="width:44px;height:44px;border-radius:14px;background:{{accent}};border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="#fff" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2" fill="#fff" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="11" cy="18" r="2" fill="#fff" stroke="none"/></svg>
+          </button>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:16px;overflow-x:auto;padding-bottom:2px;">
+          <button onClick="{{catAll}}" style="flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid {{pillAllBorder}};background:{{pillAllBg}};color:{{pillAllFg}};font-size:12.5px;font-weight:600;cursor:pointer;">All</button>
+          <button onClick="{{catMottainai}}" style="flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid {{pillMotBorder}};background:{{pillMotBg}};color:{{pillMotFg}};font-size:12.5px;font-weight:600;cursor:pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>
+            Mottainai
+          </button>
+          <button onClick="{{catOmotenashi}}" style="flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid {{pillOmoBorder}};background:{{pillOmoBg}};color:{{pillOmoFg}};font-size:12.5px;font-weight:600;cursor:pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>
+            Omotenashi
+          </button>
+          <button onClick="{{catStamp}}" style="flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid {{pillStampBorder}};background:{{pillStampBg}};color:{{pillStampFg}};font-size:12.5px;font-weight:600;cursor:pointer;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
+            Stamp Rally
+          </button>
+          <button onClick="{{catRakuten}}" style="flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:11px;border:1px solid {{pillRakBorder}};background:{{pillRakBg}};color:{{pillRakFg}};font-size:12.5px;font-weight:600;cursor:pointer;">
+            <span style="width:14px;height:14px;border-radius:50%;border:1.6px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;">R</span>
+            Rakuten
+          </button>
+        </div>
+
+        <div style="margin-top:18px;border-radius:18px;padding:20px;position:relative;overflow:hidden;min-height:140px;display:flex;align-items:center;">
+          <img src="banner-cafe.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,26,74,.88) 10%,rgba(42,92,240,.72) 100%);"></div>
+          <div style="position:relative;">
+            <div style="color:#DCE6FF;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">For merchants</div>
+            <div style="color:#fff;font-size:18px;font-weight:800;margin-top:6px;line-height:1.25;max-width:220px;">List your café free.<br>No hardware needed.</div>
+            <button onClick="{{goBusiness}}" style="margin-top:14px;background:#fff;color:{{accent}};border:0;border-radius:10px;padding:10px 16px;font-size:12.5px;font-weight:700;cursor:pointer;">Become a merchant</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:6px;background:#F0EEE8;border-radius:12px;padding:4px;margin-top:20px;">
+          <button onClick="{{setNearby}}" style="flex:1;padding:9px 0;border:0;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{feedNearbyBg}};color:{{feedNearbyFg}};">Nearby</button>
+          <button onClick="{{setForYou}}" style="flex:1;padding:9px 0;border:0;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{feedForYouBg}};color:{{feedForYouFg}};">For You</button>
+        </div>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:20px;">
+          <div style="font-size:15px;font-weight:800;">Featured rewards</div>
+          <button onClick="{{toggleShowAll}}" style="background:none;border:0;color:{{accent}};font-size:12.5px;font-weight:700;cursor:pointer;">{{showAllLabel}}</button>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+          <sc-for list="{{rewards}}" as="item" hint-placeholder-count="4">
+            <div style="display:flex;gap:12px;background:#fff;border:1px solid #ECEAE4;border-radius:16px;padding:13px;align-items:flex-start;">
+              <div style="width:56px;height:56px;border-radius:13px;position:relative;overflow:hidden;flex:0 0 auto;">
+                <img src="{{item.img}}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+                <div style="position:absolute;inset:0;background:{{item.color}};mix-blend-mode:multiply;opacity:.16;"></div>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+                  <div style="font-size:13.5px;font-weight:700;line-height:1.3;">{{item.title}}</div>
+                  <button onClick="{{item.toggleSave}}" style="background:none;border:0;padding:0;cursor:pointer;flex:0 0 auto;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="{{item.heartFill}}" stroke="{{item.heartStroke}}" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.5 8 2.2 4.5 5.8 4.1c2-.2 3.7.8 4.9 2.6.5.8 1 .8 1.5 0C13.5 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 3.9 3.8 7.6C19.5 16.4 12 21 12 21z"/></svg>
+                  </button>
+                </div>
+                <div style="font-size:11.5px;color:#8A8F98;margin-top:3px;">{{item.merchant}} &middot; {{item.dist}}</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+                  <span style="font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:7px;background:{{item.bg}};color:{{item.color}};">{{item.tag}}</span>
+                  <span style="font-size:12px;font-weight:800;color:{{accent}};">{{item.ptsLabel}}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ---------- MODES ---------- -->
+    <sc-if value="{{isModes}}" hint-placeholder-val="{{false}}">
+      <div class="kh-fade">
+        <div style="font-size:19px;font-weight:800;">Reward modes</div>
+        <div style="font-size:12.5px;color:#8A8F98;margin-top:4px;">One AI engine, tuned to a different goal each time.</div>
+
+        <div style="background:#fff;border:1px solid #ECEAE4;border-radius:18px;padding:18px;margin-top:18px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#E6F4EF;color:#1B8F72;display:flex;align-items:center;justify-content:center;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4 20 3c-1.2 6-4.2 8-7.2 8-.5 0-1 0-1.5-.1"/><path d="M9.8 6.1C13 8 14 11 12 15c-1 2-1 4 1 5"/></svg>
+          </div>
+          <div style="font-size:15px;font-weight:800;margin-top:12px;">Mottainai Mode</div>
+          <div style="font-size:12.5px;color:#6B7280;margin-top:6px;line-height:1.55;">Spots surplus stock before close and offers a reward that sells it at full price — no markdowns.</div>
+          <button onClick="{{demoMottainai}}" style="margin-top:14px;width:100%;background:#1B8F72;color:#fff;border:0;border-radius:11px;padding:11px 0;font-size:13px;font-weight:700;cursor:pointer;">Try a live demo</button>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ECEAE4;border-radius:18px;padding:18px;margin-top:12px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#F7EFDF;color:#B9812F;display:flex;align-items:center;justify-content:center;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12a7 7 0 0 1 14 0M3 12l2 8h14l2-8"/></svg>
+          </div>
+          <div style="font-size:15px;font-weight:800;margin-top:12px;">Omotenashi Mode</div>
+          <div style="font-size:12.5px;color:#6B7280;margin-top:6px;line-height:1.55;">Recognizes an inbound tourist and routes their spending to independent local shops nearby.</div>
+          <button onClick="{{demoOmotenashi}}" style="margin-top:14px;width:100%;background:#B9812F;color:#fff;border:0;border-radius:11px;padding:11px 0;font-size:13px;font-weight:700;cursor:pointer;">Try a live demo</button>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ECEAE4;border-radius:18px;padding:18px;margin-top:12px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#F7E6E2;color:#C0402E;display:flex;align-items:center;justify-content:center;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
+          </div>
+          <div style="font-size:15px;font-weight:800;margin-top:12px;">Digital Stamp Rally</div>
+          <div style="font-size:12.5px;color:#6B7280;margin-top:6px;line-height:1.55;">A modern take on eki-stamp culture — collect across merchants to unlock bigger rewards.</div>
+          <button onClick="{{demoStamp}}" style="margin-top:14px;width:100%;background:#C0402E;color:#fff;border:0;border-radius:11px;padding:11px 0;font-size:13px;font-weight:700;cursor:pointer;">Try a live demo</button>
+        </div>
+
+        <div style="background:#14181F;border-radius:18px;padding:18px;margin-top:12px;display:flex;gap:13px;align-items:flex-start;">
+          <span style="width:34px;height:34px;border-radius:50%;border:1.6px solid #fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex:0 0 auto;">R</span>
+          <div style="flex:1;">
+            <div style="color:#fff;font-size:13.5px;font-weight:700;">Every reward also earns Rakuten Points</div>
+            <div style="color:#A9AFBA;font-size:12px;margin-top:4px;line-height:1.5;">A Kakehashi-Rakuten partnership benefit, on top of the reward above.</div>
+            <button onClick="{{goBusinessPartnership}}" style="margin-top:10px;background:none;border:0;color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;">How it works
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ---------- WALLET ---------- -->
+    <sc-if value="{{isWallet}}" hint-placeholder-val="{{false}}">
+      <div class="kh-fade">
+        <div style="font-size:19px;font-weight:800;">Wallet</div>
+        <div style="background:linear-gradient(120deg,{{accent}} 0%,#1E3A8A 100%);border-radius:20px;padding:22px;margin-top:16px;position:relative;overflow:hidden;">
+          <svg width="140" height="140" viewBox="0 0 140 140" style="position:absolute;right:-30px;bottom:-40px;opacity:.2;" fill="none" stroke="#fff" stroke-width="1.5"><circle cx="70" cy="70" r="65"/><circle cx="70" cy="70" r="45"/></svg>
+          <div style="position:relative;">
+            <div style="color:#DCE6FF;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Kakehashi Token</div>
+            <div style="color:#fff;font-size:34px;font-weight:800;margin-top:6px;">{{tokenBalance}}</div>
+            <button onClick="{{openPayDefault}}" style="margin-top:16px;background:#fff;color:{{accent}};border:0;border-radius:11px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg>
+              Show pay code
+            </button>
+          </div>
+        </div>
+
+        <div style="font-size:13.5px;font-weight:800;margin-top:22px;">Café rally &middot; Nakameguro</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px;">
+          <sc-for list="{{stamps}}" as="st" hint-placeholder-count="5">
+            <div style="aspect-ratio:1;border-radius:50%;border:1.6px {{st.style}} {{st.border}};background:{{st.bg}};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:{{st.color}};">{{st.n}}</div>
+          </sc-for>
+        </div>
+
+        <div style="font-size:13.5px;font-weight:800;margin-top:22px;">Recent unlocks</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+          <sc-for list="{{history}}" as="h" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:12px;">
+              <div style="width:38px;height:38px;border-radius:11px;background:#F0EEE8;display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#14181F;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M2 7h20v5H2zM12 22V7M12 7c-1.5-3-4.5-4-6-2.5S5 8 12 7ZM12 7c1.5-3 4.5-4 6-2.5S19 8 12 7Z"/></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:12.5px;font-weight:700;">{{h.title}}</div>
+                <div style="font-size:11px;color:#8A8F98;margin-top:2px;">{{h.merchant}} &middot; {{h.when}}</div>
+              </div>
+              <div style="font-size:12.5px;font-weight:800;color:#1B8F72;">{{h.ptsLabel}}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ---------- BUSINESS ---------- -->
+    <sc-if value="{{isBusiness}}" hint-placeholder-val="{{false}}">
+      <div class="kh-fade">
+        <div style="font-size:19px;font-weight:800;">Business</div>
+        <div style="font-size:12.5px;color:#8A8F98;margin-top:4px;">For merchants, partners &amp; investors.</div>
+
+        <div style="display:flex;gap:7px;overflow-x:auto;margin-top:16px;padding-bottom:2px;">
+          <sc-for list="{{bizSections}}" as="sec" hint-placeholder-count="7">
+            <button onClick="{{sec.click}}" style="flex:0 0 auto;padding:8px 13px;border-radius:10px;border:1px solid {{sec.border}};background:{{sec.bg}};color:{{sec.fg}};font-size:12px;font-weight:700;cursor:pointer;">{{sec.label}}</button>
+          </sc-for>
+        </div>
+
+        <!-- Overview -->
+        <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
+          <div style="margin-top:18px;">
+            <div style="font-size:14px;font-weight:800;line-height:1.4;">Japan's SMEs are digitally excluded from loyalty.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+              <sc-for list="{{overviewStats}}" as="st" hint-placeholder-count="4">
+                <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;">
+                  <div style="font-size:19px;font-weight:800;color:{{accent}};">{{st.v}}</div>
+                  <div style="font-size:11px;color:#6B7280;margin-top:5px;line-height:1.4;">{{st.l}}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:12px;color:#6B7280;margin-top:14px;line-height:1.6;">Rakuten and T-Points serve large chains. Kakehashi is AI-native infrastructure built for the other 800,000 businesses.</div>
+          </div>
+        </sc-if>
+
+        <!-- Partnership -->
+        <sc-if value="{{isPartnership}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;">
+            <div style="font-size:14px;font-weight:800;">We don't replace Rakuten. We complete it.</div>
+            <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;margin-top:14px;overflow:hidden;">
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;background:#F5F4EF;padding:10px 12px;">
+                <div style="font-size:10px;font-weight:700;color:#8A8F98;">&nbsp;</div>
+                <div style="font-size:10px;font-weight:700;color:#8A8F98;">Rakuten</div>
+                <div style="font-size:10px;font-weight:700;color:{{accent}};">Kakehashi</div>
+              </div>
+              <sc-for list="{{partnershipRows}}" as="r" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:11px 12px;border-top:1px solid #F0EEE8;">
+                  <div style="font-size:11px;font-weight:600;color:#14181F;">{{r.label}}</div>
+                  <div style="font-size:10.5px;color:#8A8F98;">{{r.rakuten}}</div>
+                  <div style="font-size:10.5px;color:#1B8F72;font-weight:600;">{{r.kakehashi}}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+              <sc-for list="{{partnershipModel}}" as="p" hint-placeholder-count="3">
+                <div style="display:flex;gap:9px;align-items:flex-start;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{accent}};margin-top:6px;flex:0 0 auto;"></span>
+                  <div style="font-size:12px;color:#4B4B4B;line-height:1.55;">{{p.text}}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Revenue -->
+        <sc-if value="{{isRevenue}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{revenue}}" as="rv" hint-placeholder-count="4">
+              <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;">
+                <div style="font-size:12.5px;font-weight:700;">{{rv.t}}</div>
+                <div style="display:flex;align-items:baseline;gap:4px;margin-top:5px;">
+                  <span style="font-size:17px;font-weight:800;color:{{accent}};">{{rv.v}}</span>
+                  <span style="font-size:11px;color:#8A8F98;">{{rv.u}}</span>
+                </div>
+                <div style="font-size:11.5px;color:#6B7280;margin-top:5px;line-height:1.5;">{{rv.d}}</div>
+              </div>
+            </sc-for>
+            <div style="background:#14181F;border-radius:14px;padding:14px;">
+              <div style="color:#fff;font-size:12px;font-weight:700;">Partner math</div>
+              <div style="color:#A9AFBA;font-size:11.5px;margin-top:5px;line-height:1.55;">Ads cost a partner ¥1,000&ndash;2,000 per user. Via Kakehashi: ¥200&ndash;500 plus a reward that costs them almost nothing. The merchant funds none of it.</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Market -->
+        <sc-if value="{{isMarket}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;">
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <sc-for list="{{marketSize}}" as="m" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:13px 15px;">
+                  <div>
+                    <div style="font-size:10.5px;font-weight:700;color:#8A8F98;text-transform:uppercase;letter-spacing:.05em;">{{m.k}}</div>
+                    <div style="font-size:11px;color:#8A8F98;margin-top:3px;">{{m.d}}</div>
+                  </div>
+                  <div style="font-size:18px;font-weight:800;color:{{accent}};">{{m.v}}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+              <sc-for list="{{unitEcon}}" as="u" hint-placeholder-count="4">
+                <div style="background:#F0EEE8;border-radius:14px;padding:13px;">
+                  <div style="font-size:17px;font-weight:800;">{{u.v}}</div>
+                  <div style="font-size:10.5px;color:#6B7280;margin-top:4px;">{{u.l}}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Adoption -->
+        <sc-if value="{{isAdoption}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px;">
+            <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;">
+              <div style="font-size:12.5px;font-weight:800;color:{{accent}};">For merchants</div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:9px;">
+                <sc-for list="{{adoptionMerchant}}" as="a" hint-placeholder-count="3">
+                  <div style="display:flex;gap:8px;font-size:11.5px;color:#4B4B4B;line-height:1.5;"><span style="color:{{accent}};font-weight:800;">&middot;</span>{{a.text}}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;">
+              <div style="font-size:12.5px;font-weight:800;color:#B9812F;">For consumers</div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:9px;">
+                <sc-for list="{{adoptionConsumer}}" as="a" hint-placeholder-count="4">
+                  <div style="display:flex;gap:8px;font-size:11.5px;color:#4B4B4B;line-height:1.5;"><span style="color:#B9812F;font-weight:800;">&middot;</span>{{a.text}}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <sc-for list="{{retentionLoops}}" as="r" hint-placeholder-count="3">
+                <span style="font-size:11px;font-weight:600;padding:7px 11px;border-radius:9px;background:#F0EEE8;color:#14181F;">{{r.text}}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Roadmap -->
+        <sc-if value="{{isRoadmap}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{phases}}" as="ph" hint-placeholder-count="3">
+              <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;">
+                  <div style="font-size:10px;font-weight:700;color:{{accent}};text-transform:uppercase;letter-spacing:.05em;">{{ph.n}}</div>
+                  <div style="font-size:10.5px;color:#8A8F98;">{{ph.w}}</div>
+                </div>
+                <div style="font-size:13.5px;font-weight:800;margin-top:4px;">{{ph.t}}</div>
+                <div style="display:flex;gap:14px;margin-top:9px;">
+                  <div><div style="font-size:9.5px;color:#8A8F98;">Merchants</div><div style="font-size:11.5px;font-weight:700;margin-top:2px;">{{ph.merchants}}</div></div>
+                  <div><div style="font-size:9.5px;color:#8A8F98;">Revenue</div><div style="font-size:11.5px;font-weight:700;margin-top:2px;">{{ph.rev}}</div></div>
+                </div>
+                <div style="font-size:11px;color:#6B7280;margin-top:8px;">Milestone &middot; {{ph.ms}}</div>
+              </div>
+            </sc-for>
+            <div style="background:#14181F;border-radius:14px;padding:14px;">
+              <div style="color:#fff;font-size:12px;font-weight:700;">Why we're capital-efficient</div>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                <sc-for list="{{budgetPoints}}" as="b" hint-placeholder-count="4">
+                  <div style="font-size:11px;color:#A9AFBA;line-height:1.5;">&middot; {{b.text}}</div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- Scale-up -->
+        <sc-if value="{{isScaleup}}" hint-placeholder-val="{{false}}">
+          <div style="margin-top:18px;">
+            <div style="font-size:12.5px;color:#4B4B4B;line-height:1.55;">Japan proves the model. The engine, the partner-CAC model and QR onboarding travel as-is &mdash; only the reward marketplace and cultural mode localize.</div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px;">
+              <sc-for list="{{scaleup}}" as="s" hint-placeholder-count="4">
+                <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:13px;">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;">
+                    <div style="font-size:13px;font-weight:800;">{{s.m}}</div>
+                    <div style="font-size:10.5px;font-weight:700;color:{{accent}};">{{s.y}}</div>
+                  </div>
+                  <div style="font-size:11px;color:#6B7280;margin-top:5px;">{{s.why}}</div>
+                  <div style="font-size:10.5px;color:#14181F;margin-top:6px;font-weight:600;">&rarr; {{s.local}}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="background:#F0EEE8;border-radius:14px;padding:14px;margin-top:14px;text-align:center;">
+              <div style="font-size:13px;font-weight:800;line-height:1.5;">"We don't compete with Rakuten. We complete it.<br>We don't replace loyalty. We reinvent it."</div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ================= BOTTOM NAV ================= -->
+  <div style="position:absolute;left:0;right:0;bottom:0;height:82px;background:#fff;border-top:1px solid #ECEAE4;display:flex;align-items:center;padding:0 10px;">
+    <button onClick="{{goHome}}" style="flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{navHomeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+      <span style="font-size:9.5px;font-weight:{{navHomeWeight}};color:{{navHomeColor}};">Home</span>
+    </button>
+    <button onClick="{{goModes}}" style="flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{navModesColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+      <span style="font-size:9.5px;font-weight:{{navModesWeight}};color:{{navModesColor}};">Modes</span>
+    </button>
+    <button onClick="{{openPayDefault}}" style="flex:0 0 auto;width:54px;height:54px;border-radius:17px;background:{{accent}};border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 6px;box-shadow:0 8px 18px -6px rgba(42,92,240,.55);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg>
+    </button>
+    <button onClick="{{goWallet}}" style="flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{navWalletColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.4"/><path d="M2.5 10h19"/><circle cx="17" cy="14.3" r="1.3" fill="{{navWalletColor}}" stroke="none"/></svg>
+      <span style="font-size:9.5px;font-weight:{{navWalletWeight}};color:{{navWalletColor}};">Wallet</span>
+    </button>
+    <button onClick="{{goBusiness}}" style="flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 0;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="{{navBusinessColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V5.5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      <span style="font-size:9.5px;font-weight:{{navBusinessWeight}};color:{{navBusinessColor}};">Business</span>
+    </button>
+  </div>
+
+  <!-- ================= PAY OVERLAY ================= -->
+  <sc-if value="{{payOpen}}" hint-placeholder-val="{{false}}">
+    <div class="kh-fade" style="position:absolute;inset:0;background:#FAFAF8;z-index:20;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 6px;">
+        <div style="font-size:14px;font-weight:800;">{{payTitle}}</div>
+        <button onClick="{{closePay}}" style="width:34px;height:34px;border-radius:10px;border:1px solid #ECEAE4;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#14181F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 26px;text-align:center;">
+
+        <sc-if value="{{payStepReady}}" hint-placeholder-val="{{true}}">
+          <div class="kh-pop">
+            <div style="width:220px;height:220px;background:#fff;border:1px solid #ECEAE4;border-radius:20px;position:relative;padding:16px;">
+              <div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(12,1fr);gap:1px;width:100%;height:100%;">
+                <sc-for list="{{qrCells}}" as="c" hint-placeholder-count="144">
+                  <div style="background:{{c.v}};border-radius:1px;"></div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="font-size:12px;color:#8A8F98;margin-top:14px;font-weight:600;">Refreshes in {{qrTime}}</div>
+            <button onClick="{{cyclePersona}}" style="margin-top:14px;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #ECEAE4;border-radius:11px;padding:9px 14px;cursor:pointer;">
+              <span style="font-size:12px;color:#8A8F98;">Paying as</span>
+              <span style="font-size:12.5px;font-weight:700;">{{personaName}}</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A8F98" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>
+            </button>
+            <button onClick="{{simScan}}" style="margin-top:22px;background:{{accent}};color:#fff;border:0;border-radius:12px;padding:13px 26px;font-size:13.5px;font-weight:700;cursor:pointer;">Simulate merchant scan</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{payStepScanning}}" hint-placeholder-val="{{false}}">
+          <div class="kh-pop">
+            <div style="width:200px;height:200px;background:#14181F;border-radius:20px;position:relative;overflow:hidden;">
+              <span style="position:absolute;top:14px;left:14px;width:26px;height:26px;border-top:2.4px solid #fff;border-left:2.4px solid #fff;border-radius:6px 0 0 0;"></span>
+              <span style="position:absolute;top:14px;right:14px;width:26px;height:26px;border-top:2.4px solid #fff;border-right:2.4px solid #fff;border-radius:0 6px 0 0;"></span>
+              <span style="position:absolute;bottom:14px;left:14px;width:26px;height:26px;border-bottom:2.4px solid #fff;border-left:2.4px solid #fff;border-radius:0 0 0 6px;"></span>
+              <span style="position:absolute;bottom:14px;right:14px;width:26px;height:26px;border-bottom:2.4px solid #fff;border-right:2.4px solid #fff;border-radius:0 0 6px 0;"></span>
+              <div class="kh-scanline" style="position:absolute;left:12px;right:12px;height:2px;background:#5EA6FF;box-shadow:0 0 14px #5EA6FF;"></div>
+            </div>
+            <div style="font-size:13px;font-weight:700;margin-top:18px;">Reading payment&hellip;</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{payStepMatching}}" hint-placeholder-val="{{false}}">
+          <div class="kh-pop" style="width:100%;">
+            <div style="width:56px;height:56px;border-radius:16px;background:{{accent}};display:flex;align-items:center;justify-content:center;margin:0 auto;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+            </div>
+            <div style="font-size:13.5px;font-weight:800;margin-top:16px;">Matching your reward</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;text-align:left;">
+              <div style="display:flex;justify-content:space-between;background:#fff;border:1px solid #ECEAE4;border-radius:10px;padding:10px 13px;font-size:11.5px;"><span style="color:#8A8F98;">Preference</span><span style="font-weight:700;">{{personaAffinity}}</span></div>
+              <div style="display:flex;justify-content:space-between;background:#fff;border:1px solid #ECEAE4;border-radius:10px;padding:10px 13px;font-size:11.5px;"><span style="color:#8A8F98;">Merchant goal</span><span style="font-weight:700;">{{payGoal}}</span></div>
+              <div style="display:flex;justify-content:space-between;background:#fff;border:1px solid #ECEAE4;border-radius:10px;padding:10px 13px;font-size:11.5px;"><span style="color:#8A8F98;">Conversion odds</span><span style="font-weight:700;">{{payOdds}}</span></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{payStepReward}}" hint-placeholder-val="{{false}}">
+          <div class="kh-pop" style="width:100%;">
+            <div style="background:{{payAccent}};border-radius:18px;padding:20px;color:#fff;text-align:left;">
+              <div style="font-size:11px;font-weight:700;opacity:.85;letter-spacing:.05em;text-transform:uppercase;">{{rewardPts}} Kakehashi Token</div>
+              <div style="font-size:17px;font-weight:800;margin-top:6px;line-height:1.3;">{{rewardTitle}}</div>
+              <div style="font-size:11.5px;opacity:.85;margin-top:4px;">{{rewardSub}}</div>
+            </div>
+            <div style="background:#fff;border:1px solid #ECEAE4;border-radius:14px;padding:14px;margin-top:10px;text-align:left;">
+              <div style="font-size:11.5px;color:#6B7280;line-height:1.55;">{{rewardWhy}}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+              <span style="width:20px;height:20px;border-radius:50%;background:#F7E6E2;color:#BF0000;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;">R</span>
+              <span style="font-size:11.5px;color:#6B7280;">+500 Rakuten Points included</span>
+            </div>
+            <button onClick="{{redeemReward}}" style="margin-top:18px;width:100%;background:{{accent}};color:#fff;border:0;border-radius:12px;padding:13px 0;font-size:13.5px;font-weight:700;cursor:pointer;">Add to wallet</button>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#2A5CF0","options":["#2A5CF0","#14181F","#1B8F72","#C0402E"]}}'>
+
+var CAT = {
+  mottainai:  { fg: "#1B8F72", bg: "#E6F4EF", label: "Mottainai" },
+  omotenashi: { fg: "#B9812F", bg: "#F7EFDF", label: "Omotenashi" },
+  stamp:      { fg: "#C0402E", bg: "#F7E6E2", label: "Stamp Rally" },
+  rakuten:    { fg: "#BF0000", bg: "#FCE6E6", label: "Rakuten" }
+};
+
+var CATALOG = [
+  { id:"c1", cat:"mottainai",  title:"3 free manga chapters",             merchant:"Kurumi Coffee",        dist:"0.3 km", distVal:0.3, pts:120, img:"reward-manga.jpg" },
+  { id:"c2", cat:"omotenashi", title:"Culture pass, 3 workshops",         merchant:"Meguro Tourism Board",  dist:"0.6 km", distVal:0.6, pts:200, img:"reward-culture.jpg" },
+  { id:"c3", cat:"stamp",      title:"Café crawl, stamp 3 of 5",          merchant:"Nakameguro Trail",      dist:"0.4 km", distVal:0.4, pts:130, img:"reward-stamp.jpg" },
+  { id:"c4", cat:"rakuten",    title:"500 Rakuten Points bonus",          merchant:"Ichiba partner cafés",  dist:"0.2 km", distVal:0.2, pts:150, img:"reward-rakuten.jpg" },
+  { id:"c5", cat:"mottainai",  title:"30-day music streaming",            merchant:"Blue Note Café",        dist:"0.8 km", distVal:0.8, pts:100, img:"reward-music.jpg" },
+  { id:"c6", cat:"omotenashi", title:"Guided night-market audio tour",    merchant:"Ebisu Yokocho",         dist:"1.1 km", distVal:1.1, pts:90,  img:"reward-audio.jpg" },
+  { id:"c7", cat:"stamp",      title:"AI travel-guide day pass",          merchant:"Nakameguro Trail",      dist:"0.5 km", distVal:0.5, pts:150, img:"reward-travel.jpg" }
+];
+
+var PERSONAS = {
+  student: { name:"Aoi",   affinity:"Manga" },
+  tourist: { name:"Marco", affinity:"Travel guides" },
+  local:   { name:"Rie",   affinity:"Music" }
+};
+var PERSONA_ORDER = ["student","tourist","local"];
+
+var REWARDS = {
+  mottainai: {
+    student:{ pts:120, title:"3 free manga chapters", sub:"Shōnen Jump+ — redeems in-app", why:"Kurumi Coffee has surplus pastries today. This gets a student in before close, at full price." },
+    tourist:{ pts:150, title:"AI travel-guide day pass", sub:"Plan today in Nakameguro", why:"A surplus bento moves now, and the guide brings Marco back through the neighborhood tomorrow." },
+    local:{ pts:100, title:"30-day music streaming", sub:"Ad-free, starts today", why:"A small nudge for a regular to take today's batch instead of skipping it." }
+  },
+  omotenashi: {
+    student:{ pts:110, title:"Tokyo neighborhood e-book", sub:"Self-guided walking routes", why:"A cultural nudge for a local student to explore more of the stamp trail." },
+    tourist:{ pts:200, title:"Culture pass, 3 workshops", sub:"Funded by Meguro Tourism Board", why:"Marco is visiting from abroad. This only unlocks at independent local shops, never chains." },
+    local:{ pts:90, title:"Guided night-market audio tour", sub:"For hosting visiting friends", why:"Turns a regular into the local guide, and brings their guests along too." }
+  },
+  stamp: {
+    student:{ pts:130, title:"Stamp 3 of 5, café crawl", sub:"2 more cafés to the finale", why:"Two stops left before an illustrated print and bonus tokens unlock." },
+    tourist:{ pts:160, title:"Stamp 3 of 5, district stamp", sub:"Modeled on real eki-stamps", why:"Complete the set for a physical souvenir at a local shop." },
+    local:{ pts:120, title:"Stamp 3 of 5, regular's tier", sub:"Gold tier unlocking soon", why:"Close to a seasonal tasting event across all five trail merchants." }
+  }
+};
+var MODE_LABEL = { mottainai:"Mottainai reward", omotenashi:"Omotenashi reward", stamp:"Stamp Rally" };
+var MODE_GOAL  = { mottainai:"Clear surplus stock", omotenashi:"Route spend to locals", stamp:"Advance the trail" };
+var MODE_ACCENT = { mottainai:"#1B8F72", omotenashi:"#B9812F", stamp:"#C0402E" };
+
+var BIZ_LIST = [
+  { id:"overview",    label:"Overview" },
+  { id:"partnership", label:"Rakuten" },
+  { id:"revenue",      label:"Revenue" },
+  { id:"market",       label:"Market" },
+  { id:"adoption",     label:"Adoption" },
+  { id:"roadmap",      label:"Roadmap" },
+  { id:"scaleup",      label:"Scale-Up" }
+];
+
+var OVERVIEW_STATS = [
+  { v:"800K+", l:"F&B SMEs, no loyalty tech" },
+  { v:"4.61M t", l:"food waste yearly" },
+  { v:"42.7M", l:"tourists in 2025" },
+  { v:"58%", l:"cashless, target 65% by 2030" }
+];
+
+var PARTNERSHIP_ROWS = [
+  { label:"Serves",        rakuten:"Large retailers", kakehashi:"Cafés & restaurants" },
+  { label:"Reward type",   rakuten:"Points → discounts", kakehashi:"AI-matched experiences" },
+  { label:"Food waste",    rakuten:"—", kakehashi:"Mottainai Mode" },
+  { label:"Tourist routing", rakuten:"Partial", kakehashi:"Omotenashi Mode" }
+];
+var PARTNERSHIP_MODEL = [
+  "Rakuten Points becomes one of Kakehashi's reward options — members earn Rakuten Points through Kakehashi transactions.",
+  "Kakehashi becomes Rakuten's SME acquisition channel: new physical touchpoints for them, distribution for us.",
+  "Rakuten Ichiba and Rakuten Travel join as digital reward partners, paying the standard ¥200–500 CAC fee."
+];
+
+var REVENUE = [
+  { t:"SME SaaS subscription", v:"¥2,000–5,000", u:"/mo", d:"AI campaigns, analytics, reward engine." },
+  { t:"Digital partner CAC fee", v:"¥200–500", u:"/user", d:"Manga, AI tools, streaming, Rakuten ecosystem." },
+  { t:"Enterprise API licensing", v:"Custom", u:"", d:"Chain restaurants and hotel groups, white-label." },
+  { t:"Tourism board sponsorship", v:"B2G", u:"", d:"JNTO and local governments fund campaigns." }
+];
+
+var MARKET_SIZE = [
+  { k:"TAM", v:"¥48B", d:"800K SMEs × ¥5K/mo" },
+  { k:"SAM", v:"¥9B", d:"~150K urban, cashless POS" },
+  { k:"SOM · Yr 1", v:"¥42M", d:"500 merchants + 3 partners" }
+];
+var UNIT_ECON = [
+  { v:"94%", l:"gross margin" },
+  { v:"165", l:"merchants to break even" },
+  { v:"¥3M", l:"fixed cost / month" },
+  { v:"¥500M", l:"Year 3 ARR target" }
+];
+
+var ADOPTION_MERCHANT = ["Free start, zero hardware — 10-minute QR setup", "First proof in week 1: a Mottainai campaign sells out", "Pays only after results — no financial risk"];
+var ADOPTION_CONSUMER = ["QR pay is already a habit — PayPay, LINE Pay", "Rewards feel like unlocking, not discounting", "Stamp Rally taps eki-stamp nostalgia", "Tourists discover it organically at checkout"];
+var RETENTION_LOOPS = ["Tokens expire if unused", "Stamp Rally escalates with progress", "Matching improves with every scan"];
+
+var PHASES = [
+  { n:"Phase 1", t:"MVP Launch", w:"Q1–Q2 2026", merchants:"50 · Tokyo", rev:"¥0 · pilot", ms:"Mottainai live" },
+  { n:"Phase 2", t:"Scale & Integrate", w:"Q3–Q4 2026", merchants:"500", rev:"¥42M ARR", ms:"Omotenashi + Kyoto" },
+  { n:"Phase 3", t:"Ecosystem Expansion", w:"2027+", merchants:"5,000+", rev:"¥500M ARR", ms:"Enterprise API + B2G" }
+];
+var BUDGET_POINTS = ["Rewards funded 100% by digital partners", "No hardware at Level 1 onboarding", "Rakuten partnership brings distribution, not paid acquisition", "JNTO and tourism boards subsidize regional growth"];
+
+var SCALEUP = [
+  { m:"South Korea", y:"2027", why:"High SME density, 34M tourists", local:"K-pop and webtoon rewards" },
+  { m:"Taiwan", y:"2028", why:"Stamp culture, night-market SMEs", local:"Night-market digital rally" },
+  { m:"Indonesia", y:"2028", why:"64M MSMEs, booming cashless", local:"Halal F&B mode, QRIS" },
+  { m:"Thailand", y:"2029", why:"40M+ tourists, street-food economy", local:"Tourism-first rollout" }
+];
+
+function buildQR(seed){
+  var n = 144, h = 0;
+  for (var i=0;i<seed.length;i++){ h = (h*131 + seed.charCodeAt(i)) >>> 0; }
+  function rnd(){ h ^= h<<13; h>>>=0; h ^= h>>17; h ^= h<<5; h>>>=0; return h/4294967296; }
+  var out = [];
+  for (var k=0;k<n;k++){ out.push({ v: rnd() > 0.55 ? "#14181F" : "#fff" }); }
+  return out;
+}
+var QR_CELLS = buildQR("kakehashi-pay-aoi-tanaka-2026");
+
+function fmtTime(s){ var m = Math.floor(s/60), r = s%60; return m + ":" + (r<10?"0":"") + r; }
+
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = {
+      tab: "home",
+      category: "all",
+      feed: "nearby",
+      showAll: false,
+      saved: {},
+      persona: "student",
+      payOpen: false,
+      payStep: 0,
+      payMode: "mottainai",
+      qrSeconds: 300,
+      tokenBalance: 340,
+      stamps: 2,
+      history: [
+        { id:"h1", title:"Manga, 5 chapters", merchant:"Tsutaya Books", pts:80, when:"2 days ago" },
+        { id:"h2", title:"Music trial, 14 days", merchant:"Blue Note Café", pts:60, when:"last week" }
+      ],
+      bizSection: "overview"
+    };
+    this._timer = null;
+    this._scanT1 = null;
+    this._scanT2 = null;
+  }
+  componentWillUnmount(){
+    if (this._timer) clearInterval(this._timer);
+    if (this._scanT1) clearTimeout(this._scanT1);
+    if (this._scanT2) clearTimeout(this._scanT2);
+  }
+  startTimer(){
+    if (this._timer) return;
+    var self = this;
+    this._timer = setInterval(function(){
+      self.setState(function(s){
+        var n = s.qrSeconds - 1;
+        if (n <= 0){
+          clearInterval(self._timer); self._timer = null;
+          return { qrSeconds: 300, payOpen: false, payStep: 0 };
+        }
+        return { qrSeconds: n };
+      });
+    }, 1000);
+  }
+  stopTimer(){ if (this._timer){ clearInterval(this._timer); this._timer = null; } }
+
+  setTab(t){ var self=this; return function(){ self.setState({ tab: t }); }; }
+  setCategory(c){ var self=this; return function(){ self.setState({ category: c, showAll:false }); }; }
+  setFeed(f){ var self=this; return function(){ self.setState({ feed: f }); }; }
+  toggleShowAll(){ this.setState(function(s){ return { showAll: !s.showAll }; }); }
+  toggleSaved(id){
+    var self=this;
+    return function(){ self.setState(function(s){ var m=Object.assign({},s.saved); m[id]=!m[id]; return { saved:m }; }); };
+  }
+  cyclePersona(){
+    var self=this;
+    this.setState(function(s){
+      var i = PERSONA_ORDER.indexOf(s.persona);
+      return { persona: PERSONA_ORDER[(i+1)%PERSONA_ORDER.length] };
+    });
+  }
+  openPay(mode){
+    var self=this;
+    return function(){
+      var m = mode || (self.state.category === "all" || self.state.category === "rakuten" ? "mottainai" : self.state.category);
+      self.setState({ payOpen:true, payStep:0, payMode:m, qrSeconds:300 });
+      self.startTimer();
+    };
+  }
+  closePay(){
+    this.stopTimer();
+    if (this._scanT1) clearTimeout(this._scanT1);
+    if (this._scanT2) clearTimeout(this._scanT2);
+    this.setState({ payOpen:false, payStep:0 });
+  }
+  simScan(){
+    this.stopTimer();
+    var self=this;
+    this.setState({ payStep:1 });
+    this._scanT1 = setTimeout(function(){
+      self.setState({ payStep:2 });
+      self._scanT2 = setTimeout(function(){ self.setState({ payStep:3 }); }, 1300);
+    }, 1100);
+  }
+  redeemReward(){
+    var s = this.state;
+    var r = REWARDS[s.payMode][s.persona];
+    this.setState(function(s2){
+      return {
+        tokenBalance: s2.tokenBalance + r.pts,
+        stamps: s2.payMode === "stamp" && s2.stamps < 5 ? s2.stamps + 1 : s2.stamps,
+        history: [{ id:"h"+Date.now(), title:r.title, merchant:MODE_LABEL[s2.payMode], pts:r.pts, when:"just now" }].concat(s2.history),
+        payOpen:false, payStep:0
+      };
+    });
+  }
+  setBiz(id){ var self=this; return function(){ self.setState({ bizSection:id }); }; }
+
+  renderVals(){
+    var s = this.state;
+    var props = this.props || {};
+    var accent = props.accent || "#2A5CF0";
+    var MUTED = "#B9B6AC";
+
+    function pill(active, fg, bg, border){
+      return active ? { fg: fg, bg: bg, border: border } : { fg: "#6B7280", bg: "#fff", border: "#ECEAE4" };
+    }
+    var pAll = pill(s.category==="all", "#fff", accent, accent);
+    var pMot = pill(s.category==="mottainai", CAT.mottainai.fg, CAT.mottainai.bg, CAT.mottainai.bg);
+    var pOmo = pill(s.category==="omotenashi", CAT.omotenashi.fg, CAT.omotenashi.bg, CAT.omotenashi.bg);
+    var pStamp = pill(s.category==="stamp", CAT.stamp.fg, CAT.stamp.bg, CAT.stamp.bg);
+    var pRak = pill(s.category==="rakuten", CAT.rakuten.fg, CAT.rakuten.bg, CAT.rakuten.bg);
+
+    var catalog = CATALOG.filter(function(r){ return s.category === "all" || r.cat === s.category; });
+    catalog = catalog.slice().sort(function(a,b){ return s.feed === "nearby" ? a.distVal - b.distVal : b.pts - a.pts; });
+    var shownList = s.showAll ? catalog : catalog.slice(0,4);
+    var self = this;
+    var rewardsOut = shownList.map(function(r){
+      var c = CAT[r.cat];
+      return {
+        id:r.id, title:r.title, merchant:r.merchant, dist:r.dist, tag:c.label, img:r.img,
+        color:c.fg, bg:c.bg, ptsLabel:"+"+r.pts,
+        heartFill: s.saved[r.id] ? "#C0402E" : "none",
+        heartStroke: s.saved[r.id] ? "#C0402E" : "#B9B6AC",
+        toggleSave: self.toggleSaved(r.id)
+      };
+    });
+
+    var persona = PERSONAS[s.persona];
+    var reward = REWARDS[s.payMode] ? REWARDS[s.payMode][s.persona] : REWARDS.mottainai.student;
+
+    function navColor(active){ return active ? accent : MUTED; }
+    function navWeight(active){ return active ? "700" : "500"; }
+
+    var bizSectionsOut = BIZ_LIST.map(function(b){
+      var active = s.bizSection === b.id;
+      return {
+        id:b.id, label:b.label,
+        fg: active ? "#fff" : "#6B7280",
+        bg: active ? "#14181F" : "#fff",
+        border: active ? "#14181F" : "#ECEAE4",
+        click: self.setBiz(b.id)
+      };
+    });
+
+    var stampsOut = [0,1,2,3,4].map(function(i){
+      var filled = i < s.stamps;
+      return { n:i+1, filled:filled, style: filled?"solid":"dashed", border: filled?accent:"#ECEAE4", bg: filled?accent:"#fff", color: filled?"#fff":"#B9B6AC" };
+    });
+
+    var historyOut = s.history.map(function(h){ return { title:h.title, merchant:h.merchant, when:h.when, ptsLabel:"+"+h.pts }; });
+
+    return {
+      accent: accent,
+      noop: function(){},
+
+      isHome: s.tab==="home", isModes: s.tab==="modes", isWallet: s.tab==="wallet", isBusiness: s.tab==="business",
+      goHome: this.setTab("home"), goModes: this.setTab("modes"), goWallet: this.setTab("wallet"),
+      goBusiness: this.setTab("business"), goBusinessPartnership: function(){ self.setState({ tab:"business", bizSection:"partnership" }); },
+
+      navHomeColor: navColor(s.tab==="home"), navHomeWeight: navWeight(s.tab==="home"),
+      navModesColor: navColor(s.tab==="modes"), navModesWeight: navWeight(s.tab==="modes"),
+      navWalletColor: navColor(s.tab==="wallet"), navWalletWeight: navWeight(s.tab==="wallet"),
+      navBusinessColor: navColor(s.tab==="business"), navBusinessWeight: navWeight(s.tab==="business"),
+
+      catAll: this.setCategory("all"), catMottainai: this.setCategory("mottainai"),
+      catOmotenashi: this.setCategory("omotenashi"), catStamp: this.setCategory("stamp"), catRakuten: this.setCategory("rakuten"),
+      pillAllFg:pAll.fg, pillAllBg:pAll.bg, pillAllBorder:pAll.border,
+      pillMotFg:pMot.fg, pillMotBg:pMot.bg, pillMotBorder:pMot.border,
+      pillOmoFg:pOmo.fg, pillOmoBg:pOmo.bg, pillOmoBorder:pOmo.border,
+      pillStampFg:pStamp.fg, pillStampBg:pStamp.bg, pillStampBorder:pStamp.border,
+      pillRakFg:pRak.fg, pillRakBg:pRak.bg, pillRakBorder:pRak.border,
+
+      setNearby: this.setFeed("nearby"), setForYou: this.setFeed("forYou"),
+      feedNearbyBg: s.feed==="nearby" ? "#fff" : "transparent", feedNearbyFg: s.feed==="nearby" ? "#14181F" : "#8A8F98",
+      feedForYouBg: s.feed==="forYou" ? "#fff" : "transparent", feedForYouFg: s.feed==="forYou" ? "#14181F" : "#8A8F98",
+
+      showAllLabel: s.showAll ? "Show less" : "See all",
+      toggleShowAll: function(){ self.toggleShowAll(); },
+      rewards: rewardsOut,
+
+      demoMottainai: this.openPay("mottainai"), demoOmotenashi: this.openPay("omotenashi"), demoStamp: this.openPay("stamp"),
+      openPayDefault: this.openPay(),
+
+      tokenBalance: s.tokenBalance, stamps: stampsOut, history: historyOut,
+
+      bizSections: bizSectionsOut,
+      isOverview: s.bizSection==="overview", isPartnership: s.bizSection==="partnership",
+      isRevenue: s.bizSection==="revenue", isMarket: s.bizSection==="market",
+      isAdoption: s.bizSection==="adoption", isRoadmap: s.bizSection==="roadmap", isScaleup: s.bizSection==="scaleup",
+      overviewStats: OVERVIEW_STATS,
+      partnershipRows: PARTNERSHIP_ROWS,
+      partnershipModel: PARTNERSHIP_MODEL.map(function(t){ return { text:t }; }),
+      revenue: REVENUE,
+      marketSize: MARKET_SIZE, unitEcon: UNIT_ECON,
+      adoptionMerchant: ADOPTION_MERCHANT.map(function(t){ return { text:t }; }),
+      adoptionConsumer: ADOPTION_CONSUMER.map(function(t){ return { text:t }; }),
+      retentionLoops: RETENTION_LOOPS.map(function(t){ return { text:t }; }),
+      phases: PHASES,
+      budgetPoints: BUDGET_POINTS.map(function(t){ return { text:t }; }),
+      scaleup: SCALEUP,
+
+      payOpen: s.payOpen,
+      payTitle: s.payStep < 3 ? "Pay & earn" : "Reward unlocked",
+      payStepReady: s.payStep===0, payStepScanning: s.payStep===1, payStepMatching: s.payStep===2, payStepReward: s.payStep===3,
+      qrCells: QR_CELLS, qrTime: fmtTime(s.qrSeconds),
+      personaName: persona.name, personaAffinity: persona.affinity,
+      cyclePersona: function(){ self.cyclePersona(); },
+      simScan: function(){ self.simScan(); },
+      closePay: function(){ self.closePay(); },
+      redeemReward: function(){ self.redeemReward(); },
+      payGoal: MODE_GOAL[s.payMode], payOdds: s.persona==="tourist" ? "58%" : "66%",
+      payAccent: MODE_ACCENT[s.payMode],
+      rewardPts: "+"+reward.pts, rewardTitle: reward.title, rewardSub: reward.sub, rewardWhy: reward.why
+    };
+  }
+}
+</script>
+</x-dc>
+</body>
+</html>
